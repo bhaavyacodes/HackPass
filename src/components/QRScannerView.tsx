@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Html5Qrcode } from 'html5-qrcode';
+import '../styles/qr-scanner.css';
 import { 
   Camera, 
   CameraOff, 
@@ -34,7 +35,11 @@ export const QRScannerView: React.FC<QRScannerViewProps> = ({
   const [selectedEventId, setSelectedEventId] = useState<string>('all');
   const [stationName, setStationName] = useState<string>('Gate Scanner Station 1');
   const [scannerActive, setScannerActive] = useState<boolean>(false);
+  const [cameraStarting, setCameraStarting] = useState<boolean>(false);
   const [cameraError, setCameraError] = useState<string | null>(null);
+  const [torchSupported, setTorchSupported] = useState<boolean>(false);
+  const [torchEnabled, setTorchEnabled] = useState<boolean>(false);
+  const [torchError, setTorchError] = useState<string | null>(null);
   
   // Scanning modes
   const [markAsLate, setMarkAsLate] = useState<boolean>(false);
@@ -61,15 +66,20 @@ export const QRScannerView: React.FC<QRScannerViewProps> = ({
 
   const html5QrCodeRef = useRef<Html5Qrcode | null>(null);
   const isScanningRef = useRef<boolean>(false);
+  const isStartingRef = useRef<boolean>(false);
+  const processingRef = useRef<boolean>(false);
   const lastScannedCodeRef = useRef<string>('');
   const lastScannedTimeRef = useRef<number>(0);
+  const scanSettingsRef = useRef({ selectedEventId, stationName, markAsLate });
+  scanSettingsRef.current = { selectedEventId, stationName, markAsLate };
 
   // Load registrations for quick manual marking
   const loadRecentRegistrations = async () => {
     try {
       setLoadingList(true);
+      const currentEventId = scanSettingsRef.current.selectedEventId;
       const data = await api.getRegistrations({
-        eventId: selectedEventId === 'all' ? undefined : selectedEventId,
+        eventId: currentEventId === 'all' ? undefined : currentEventId,
       });
       setRecentRegistrations(data);
       setFilteredList(data.slice(0, 8));
@@ -102,7 +112,7 @@ export const QRScannerView: React.FC<QRScannerViewProps> = ({
 
   // Handle verification of a code (from QR or manual entry)
   const handleVerifyTicket = async (rawCode: string) => {
-    if (!rawCode || processing) return;
+    if (!rawCode || processingRef.current) return;
 
     let ticketId = rawCode.trim();
 
@@ -118,20 +128,23 @@ export const QRScannerView: React.FC<QRScannerViewProps> = ({
 
     // Debounce duplicate scans of the exact same code within 3 seconds
     const now = Date.now();
-    if (lastScannedCodeRef.current === ticketId && now - lastScannedTimeRef.current < 2500) {
+    const scanKey = ticketId.toLowerCase();
+    if (lastScannedCodeRef.current === scanKey && now - lastScannedTimeRef.current < 2500) {
       return;
     }
-    lastScannedCodeRef.current = ticketId;
+    lastScannedCodeRef.current = scanKey;
     lastScannedTimeRef.current = now;
 
+    processingRef.current = true;
     setProcessing(true);
 
     try {
+      const currentSettings = scanSettingsRef.current;
       const res = await api.scanPass({
         ticketId,
-        station: stationName,
-        forceMode: markAsLate ? 'mark_late' : undefined,
-        activeEventId: selectedEventId !== 'all' ? selectedEventId : undefined,
+        station: currentSettings.stationName,
+        forceMode: currentSettings.markAsLate ? 'mark_late' : undefined,
+        activeEventId: currentSettings.selectedEventId !== 'all' ? currentSettings.selectedEventId : undefined,
       });
 
       if (res.code === 'CHECK_IN_SUCCESS') {
@@ -171,6 +184,15 @@ export const QRScannerView: React.FC<QRScannerViewProps> = ({
           previousCheckIn: res.previousCheckIn,
           timestamp: new Date().toLocaleTimeString(),
         });
+      } else {
+        playDuplicateWarningSound();
+        setLastScanResult({
+          type: 'ERROR',
+          message: res.message || 'This pass could not be verified.',
+          registration: res.data,
+          event: res.event,
+          timestamp: new Date().toLocaleTimeString(),
+        });
       }
 
       loadRecentRegistrations();
@@ -182,6 +204,7 @@ export const QRScannerView: React.FC<QRScannerViewProps> = ({
         timestamp: new Date().toLocaleTimeString(),
       });
     } finally {
+      processingRef.current = false;
       setProcessing(false);
       setManualCode('');
     }
@@ -189,49 +212,112 @@ export const QRScannerView: React.FC<QRScannerViewProps> = ({
 
   // Start Camera QR Scanner
   const startScanner = async () => {
+    if (isStartingRef.current || isScanningRef.current) return;
+    isStartingRef.current = true;
+    setCameraStarting(true);
     setCameraError(null);
+    setTorchError(null);
+
+    const qrScanner = new Html5Qrcode('qr-reader-container');
+    html5QrCodeRef.current = qrScanner;
+    const qrbox = (viewfinderWidth: number, viewfinderHeight: number) => {
+      const size = Math.floor(Math.min(300, viewfinderWidth * 0.88, viewfinderHeight * 0.88));
+      return { width: size, height: size };
+    };
+    const cameraConfig = (facingMode: 'environment' | 'user', exact: boolean) => ({
+      fps: 20,
+      qrbox,
+      videoConstraints: {
+        facingMode: exact ? { exact: facingMode } : { ideal: facingMode },
+        width: { ideal: 1280 },
+        height: { ideal: 720 },
+      },
+    });
+    const onDecoded = (decodedText: string) => {
+      void handleVerifyTicket(decodedText);
+    };
+    const onDecodeError = (_errorMessage: string) => {
+      // Frame-level decode misses are expected while the camera is searching.
+    };
+
     try {
-      const qrScanner = new Html5Qrcode('qr-reader-container');
-      html5QrCodeRef.current = qrScanner;
+      try {
+        await qrScanner.start(
+          { facingMode: 'environment' },
+          cameraConfig('environment', true),
+          onDecoded,
+          onDecodeError
+        );
+      } catch (rearCameraError) {
+        console.warn('Unable to start the rear camera; trying an available camera.', rearCameraError);
+        await qrScanner.start(
+          { facingMode: 'user' },
+          cameraConfig('user', false),
+          onDecoded,
+          onDecodeError
+        );
+      }
 
-      await qrScanner.start(
-        { facingMode: 'environment' },
-        {
-          fps: 10,
-          qrbox: { width: 250, height: 250 },
-          aspectRatio: 1.0,
-        },
-        (decodedText) => {
-          handleVerifyTicket(decodedText);
-        },
-        (errorMessage) => {
-          // Normal frame scan tick (ignore noise)
-        }
-      );
-
-      setScannerActive(true);
       isScanningRef.current = true;
-    } catch (err: any) {
-      console.error('Camera start error:', err);
-      setCameraError(
-        'Unable to access camera. Please allow camera permissions or use the manual code entry input.'
-      );
+      setScannerActive(true);
+      try {
+        setTorchSupported(qrScanner.getRunningTrackCameraCapabilities().torchFeature().isSupported());
+      } catch (capabilityError) {
+        console.warn('Could not read camera torch support.', capabilityError);
+        setTorchSupported(false);
+      }
+    } catch (startError) {
+      console.error('Camera start error:', startError);
+      const detail = startError instanceof Error ? startError.message : String(startError);
+      setCameraError(`Unable to start the camera. ${detail}`);
       setScannerActive(false);
+      html5QrCodeRef.current = null;
+      isScanningRef.current = false;
+    } finally {
+      isStartingRef.current = false;
+      setCameraStarting(false);
+    }
+  };
+
+  const toggleTorch = async () => {
+    const qrScanner = html5QrCodeRef.current;
+    if (!qrScanner || !isScanningRef.current) return;
+
+    try {
+      const torch = qrScanner.getRunningTrackCameraCapabilities().torchFeature();
+      if (!torch.isSupported()) {
+        setTorchSupported(false);
+        setTorchError('Flash control is not supported by this camera.');
+        return;
+      }
+
+      const nextState = torch.value() !== true;
+      await torch.apply(nextState);
+      setTorchEnabled(nextState);
+      setTorchError(null);
+    } catch (error) {
+      console.error('Unable to toggle camera flash:', error);
+      setTorchError('Unable to toggle the camera flash on this device.');
     }
   };
 
   // Stop Camera QR Scanner
   const stopScanner = async () => {
-    if (html5QrCodeRef.current && isScanningRef.current) {
-      try {
-        await html5QrCodeRef.current.stop();
-        html5QrCodeRef.current.clear();
-      } catch (e) {
-        console.error(e);
-      }
+    const qrScanner = html5QrCodeRef.current;
+    if (!qrScanner || !isScanningRef.current) return;
+
+    try {
+      await qrScanner.stop();
+      qrScanner.clear();
       html5QrCodeRef.current = null;
       isScanningRef.current = false;
       setScannerActive(false);
+      setTorchEnabled(false);
+      setTorchSupported(false);
+      setTorchError(null);
+    } catch (error) {
+      console.error('Camera stop error:', error);
+      setCameraError('Unable to stop the camera cleanly. Please try stopping it again.');
     }
   };
 
@@ -352,7 +438,7 @@ export const QRScannerView: React.FC<QRScannerViewProps> = ({
             </div>
 
             {/* Viewfinder Container */}
-            <div className="relative w-full aspect-video rounded-2xl bg-pink-50 border border-purple-200 flex flex-col items-center justify-center overflow-hidden">
+            <div className="relative w-full aspect-square sm:aspect-video rounded-2xl bg-pink-50 border border-purple-200 flex flex-col items-center justify-center overflow-hidden">
               <div id="qr-reader-container" className="w-full h-full bg-pink-50"></div>
 
               {!scannerActive && (
@@ -368,10 +454,11 @@ export const QRScannerView: React.FC<QRScannerViewProps> = ({
                   </div>
                   <button
                     onClick={startScanner}
-                    className="px-6 py-2.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-black font-bold text-xs shadow-neon-cyan transition-all inline-flex items-center gap-2"
+                    disabled={cameraStarting}
+                    className="px-6 py-2.5 rounded-xl bg-pink-600 hover:bg-pink-700 text-white font-bold text-xs shadow-pastel-purple transition-all disabled:opacity-60 inline-flex items-center gap-2"
                   >
                     <Camera className="w-4 h-4" />
-                    <span>Activate Camera</span>
+                    <span>{cameraStarting ? 'Starting Camera…' : 'Activate Camera'}</span>
                   </button>
                 </div>
               )}
@@ -390,19 +477,58 @@ export const QRScannerView: React.FC<QRScannerViewProps> = ({
                 <p className="text-xs text-slate-600">
                   Align QR pass within the viewfinder box.
                 </p>
-                <button
-                  onClick={stopScanner}
-                  className="px-4 py-1.5 rounded-xl bg-red-50 hover:bg-red-100 border border-red-200 text-red-800 text-xs font-semibold flex items-center gap-1.5 transition-all"
-                >
-                  <CameraOff className="w-3.5 h-3.5" />
-                  <span>Stop Camera</span>
-                </button>
+                <div className="flex items-center gap-2">
+                  {torchSupported && (
+                    <button
+                      onClick={toggleTorch}
+                      aria-pressed={torchEnabled}
+                      title="Toggle camera flash"
+                      className={`px-3 py-1.5 rounded-xl border text-xs font-semibold flex items-center gap-1.5 transition-all ${
+                        torchEnabled
+                          ? 'bg-amber-100 border-amber-300 text-amber-900'
+                          : 'bg-white border-purple-200 text-purple-800 hover:bg-pink-50'
+                      }`}
+                    >
+                      <Sparkles className="w-3.5 h-3.5" />
+                      <span>{torchEnabled ? 'Flash On' : 'Flash'}</span>
+                    </button>
+                  )}
+                  <button
+                    onClick={stopScanner}
+                    className="px-4 py-1.5 rounded-xl bg-red-50 hover:bg-red-100 border border-red-200 text-red-800 text-xs font-semibold flex items-center gap-1.5 transition-all"
+                  >
+                    <CameraOff className="w-3.5 h-3.5" />
+                    <span>Stop Camera</span>
+                  </button>
+                </div>
               </div>
             )}
 
+            {torchError && (
+              <p className="mt-2 text-xs text-amber-800">{torchError}</p>
+            )}
+
             {cameraError && (
-              <div className="mt-3 p-3 rounded-xl bg-red-50 border border-red-200 text-red-800 text-xs">
-                {cameraError}
+              <div className="mt-4 p-3 rounded-xl bg-pink-50 border border-purple-200 text-purple-950">
+                <p className="text-sm font-medium">Camera error: {cameraError}</p>
+                <p className="mt-2 text-sm">Enter the ticket ID manually:</p>
+                <div className="mt-2 flex gap-2">
+                  <input
+                    type="text"
+                    className="min-w-0 flex-1 px-3 py-2 border border-purple-200 rounded-xl bg-white text-purple-950 focus:outline-none focus:border-purple-500"
+                    value={manualCode}
+                    onChange={(e) => setManualCode(e.target.value)}
+                    placeholder="Ticket ID"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => void handleVerifyTicket(manualCode)}
+                    disabled={processing || !manualCode.trim()}
+                    className="px-4 py-2 bg-pink-600 text-white rounded-xl hover:bg-pink-700 disabled:opacity-50"
+                  >
+                    Verify
+                  </button>
+                </div>
               </div>
             )}
 
