@@ -14,6 +14,7 @@ import { AdminDashboard } from './components/AdminDashboard';
 import { AdminLoginModal } from './components/AdminLoginModal';
 import { CustomCursor } from './components/CustomCursor';
 import { PageLoader } from './components/PageLoader';
+import { ChatBotIcon } from './components/ChatBotIcon';
 import { EventItem, Registration } from './types';
 import { api } from './services/api';
 import { Search, AlertCircle, LayoutGrid, List, Lock, QrCode, Shield } from 'lucide-react';
@@ -418,6 +419,7 @@ export function App() {
         onSuccess={handleLoginSuccess}
       />
 
+      <ChatBotIcon />
     </div>
   );
 }

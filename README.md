@@ -1,11 +1,11 @@
-# ⚡ HACKPASS — Smart Event Management System 
+# ⚡ EVENTHUB — Smart Event Management System (EMS 2.0)
 ### Official Centralized Event Ecosystem for **HACK4TECH (H4T)**
 #### GLA University (NAAC A+ Accredited) • Office of Students' Welfare
 
 ---
 
 ## 🌟 Overview
-**HACKPASS** is a high-performance, real-time Event Management System engineered specifically for **Hack4Tech** at GLA University. It empowers students to explore flagship tech events, register individually or in multi-member teams, generate cryptographically signed QR-based event passes, and enables event organizers and volunteers to manage registrations and verify live gate attendance through a cyber-themed administrative terminal with automated duplicate check-in prevention.
+**EVENTHUB** is a high-performance, real-time Event Management System engineered specifically for **Hack4Tech** at GLA University. It empowers students to explore flagship tech events, register individually or in multi-member teams, generate cryptographically signed QR-based event passes, and enables event organizers and volunteers to manage registrations and verify live gate attendance through a cyber-themed administrative terminal with automated duplicate check-in prevention.
 
 ---
 
@@ -68,7 +68,18 @@ npm start
 
 Open **`http://localhost:5000`** in your browser.
 
-### 3. Demo Credentials
+### 3. Configure the chatbot
+The chatbot uses Gemini on the server. Set `GEMINI_API_KEY` in the server environment; never put the key in frontend code or commit it to GitHub. The model defaults to `gemini-3.8-flash`; override it with `GEMINI_MODEL` if needed.
+
+In PowerShell, set the key before starting the development server:
+```powershell
+$env:GEMINI_API_KEY = "your-gemini-api-key"
+npm run dev
+```
+
+For Render, add `GEMINI_API_KEY` as a secret environment variable in the web service settings. The chat endpoint returns a setup message until the key is configured.
+
+### 4. Demo Credentials
 - **Admin Email**: `admin@hack4tech.com`
 - **Admin Password**: `admin123`
 - Pre-registered student demo emails for "Find My Pass":

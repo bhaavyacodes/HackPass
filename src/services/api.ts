@@ -149,6 +149,24 @@ export const api = {
     return json.data;
   },
 
+  async sendChatMessage(payload: {
+    message: string;
+    history?: Array<{ role: 'user' | 'model'; text: string }>;
+  }): Promise<{ reply: string; sources: string[] }> {
+    const res = await fetch(`${API_BASE}/chat`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    const json = await res.json();
+    if (!res.ok) throw new Error(json.message || 'Chat service is unavailable.');
+    if (typeof json.reply !== 'string') throw new Error('The chat service returned an invalid response.');
+    return {
+      reply: json.reply,
+      sources: Array.isArray(json.sources) ? json.sources : [],
+    };
+  },
+
   // Admin Auth
   async adminLogin(credentials: { email: string; password: string }): Promise<{ token: string; user: AdminUser }> {
     const res = await fetch(`${API_BASE}/admin/login`, {
