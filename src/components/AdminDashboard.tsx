@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   BarChart3, 
   Users, 
@@ -47,11 +47,15 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   const [registrations, setRegistrations] = useState<Registration[]>([]);
   const [logs, setLogs] = useState<CheckInLog[]>([]);
   const [loading, setLoading] = useState(false);
+  const [loadError, setLoadError] = useState<string | null>(null);
 
   // Filters
   const [selectedEventId, setSelectedEventId] = useState<string>('all');
   const [selectedStatus, setSelectedStatus] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const filtersRef = useRef({ selectedEventId, selectedStatus, searchQuery });
+  const loadingRef = useRef(false);
+  filtersRef.current = { selectedEventId, selectedStatus, searchQuery };
 
   // Selected registration for details modal
   const [inspectReg, setInspectReg] = useState<Registration | null>(null);
@@ -88,29 +92,48 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   });
 
   const loadData = async () => {
+    if (loadingRef.current) return;
+    loadingRef.current = true;
     setLoading(true);
     try {
+      const filters = filtersRef.current;
       const [statsData, regsData, logsData] = await Promise.all([
         api.getStats(),
         api.getRegistrations({
-          eventId: selectedEventId === 'all' ? undefined : selectedEventId,
-          status: selectedStatus === 'all' ? undefined : selectedStatus,
-          search: searchQuery || undefined,
+          eventId: filters.selectedEventId === 'all' ? undefined : filters.selectedEventId,
+          status: filters.selectedStatus === 'all' ? undefined : filters.selectedStatus,
+          search: filters.searchQuery || undefined,
         }),
         api.getAttendanceLogs(),
       ]);
       setStats(statsData);
       setRegistrations(regsData);
       setLogs(logsData);
-    } catch (e) {
-      console.error(e);
+      setLoadError(null);
+    } catch (error) {
+      console.error('Failed to refresh admin dashboard:', error);
+      setLoadError(error instanceof Error ? error.message : 'Unable to load dashboard data.');
     } finally {
+      loadingRef.current = false;
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    loadData();
+    const refreshWhenVisible = () => {
+      if (document.visibilityState === 'visible') {
+        void loadData();
+      }
+    };
+
+    refreshWhenVisible();
+    const intervalId = window.setInterval(refreshWhenVisible, 5000);
+    document.addEventListener('visibilitychange', refreshWhenVisible);
+
+    return () => {
+      window.clearInterval(intervalId);
+      document.removeEventListener('visibilitychange', refreshWhenVisible);
+    };
   }, [selectedEventId, selectedStatus]);
 
   const handleSearchSubmit = (e: React.FormEvent) => {
@@ -256,6 +279,13 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           </button>
         </div>
       </div>
+
+      {loadError && (
+        <div role="alert" className="flex items-center gap-2 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">
+          <AlertTriangle className="h-4 w-4 shrink-0" />
+          <span>Dashboard refresh failed: {loadError}. Retrying automatically.</span>
+        </div>
+      )}
 
       {/* Navigation Tabs */}
       <div className="flex items-center gap-2 overflow-x-auto pb-1">

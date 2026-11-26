@@ -13,18 +13,6 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// Serve presentation PDF
-app.get('/download/presentation', (req, res) => {
-  const pdfPath = path.join(__dirname, '..', 'Hack4Tech_EventHub_Presentation.pdf');
-  if (fs.existsSync(pdfPath)) {
-    res.setHeader('Content-Type', 'application/pdf');
-    res.setHeader('Content-Disposition', 'attachment; filename="Hack4Tech_EventHub_Presentation.pdf"');
-    res.sendFile(pdfPath);
-  } else {
-    res.status(404).send('PDF presentation not found.');
-  }
-});
-
 // Serve static images
 const publicImagesPath = path.join(__dirname, '..', 'public', 'images');
 app.use('/images', express.static(publicImagesPath));
@@ -412,7 +400,13 @@ app.post('/api/attendance/scan', (req, res) => {
   };
 
   db.checkInLogs.unshift(successLog);
-  writeDb(db);
+  if (!writeDb(db)) {
+    return res.status(500).json({
+      success: false,
+      code: 'PERSISTENCE_ERROR',
+      message: 'The check-in could not be saved. Please try again or contact an administrator.'
+    });
+  }
 
   res.json({
     success: true,
