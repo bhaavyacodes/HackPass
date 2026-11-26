@@ -263,7 +263,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           onClick={() => setActiveTab('overview')}
           className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 ${
             activeTab === 'overview'
-              ? 'bg-purple-700 text-white shadow-pastel-purple'
+              ? 'bg-pink-600 text-white shadow-pastel-purple'
               : 'bg-white text-slate-600 hover:text-purple-950 hover:bg-purple-50 border border-purple-200'
           }`}
         >
@@ -275,7 +275,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           onClick={() => setActiveTab('registrations')}
           className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 ${
             activeTab === 'registrations'
-              ? 'bg-purple-700 text-white shadow-pastel-purple'
+              ? 'bg-pink-600 text-white shadow-pastel-purple'
               : 'bg-white text-slate-600 hover:text-purple-950 hover:bg-purple-50 border border-purple-200'
           }`}
         >
@@ -287,7 +287,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           onClick={() => setActiveTab('events')}
           className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 ${
             activeTab === 'events'
-              ? 'bg-purple-700 text-white shadow-pastel-purple'
+              ? 'bg-pink-600 text-white shadow-pastel-purple'
               : 'bg-white text-slate-600 hover:text-purple-950 hover:bg-purple-50 border border-purple-200'
           }`}
         >
@@ -299,7 +299,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           onClick={() => setActiveTab('logs')}
           className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 ${
             activeTab === 'logs'
-              ? 'bg-purple-700 text-white shadow-pastel-purple'
+              ? 'bg-pink-600 text-white shadow-pastel-purple'
               : 'bg-white text-slate-600 hover:text-purple-950 hover:bg-purple-50 border border-purple-200'
           }`}
         >
