@@ -1,0 +1,408 @@
+{
+  "events": [
+    {
+      "id": "visionx-2026",
+      "title": "VISIONX",
+      "tagline": "TURNING VISION INTO REALITY",
+      "subtitle": "8 HOUR HACKATHON",
+      "theme": "cyberpunk",
+      "category": "Hackathon",
+      "status": "open",
+      "organization": "GLA University (NAAC A+), Office of Students' Welfare & Hack4Tech (H4T)",
+      "poster": "/images/visionx.jpg",
+      "date": "20 April, 2026",
+      "dateIso": "2026-04-20",
+      "time": "09:00 AM – 05:00 PM",
+      "duration": "8 Hours",
+      "venue": "CSED Block, AB-11, GLA University, Mathura",
+      "prizePool": "₹25,000+",
+      "prizePoolValue": 25000,
+      "registrationFee": 89,
+      "feeText": "₹89 / Student",
+      "teamType": "individual_or_team",
+      "minTeamSize": 1,
+      "maxTeamSize": 4,
+      "genderRestriction": "all",
+      "eligibility": "All Courses & Departments (B.Tech, BCA, MCA, Diploma). Official Duty Leave provided.",
+      "domains": [
+        "AI / Machine Learning",
+        "Cloud Computing",
+        "Cyber Security",
+        "Web & Mobile Dev"
+      ],
+      "perks": [
+        "Cash Prizes & Tech Goodies",
+        "Official Participation Certificates",
+        "Free Gourmet Refreshments & Energy Drinks",
+        "Official Academic Leave Provided",
+        "Mentorship by Industry Experts & Alumni"
+      ],
+      "coordinators": [
+        {
+          "name": "Manish Chaudhary",
+          "phone": "9368322158",
+          "role": "Lead Organizer"
+        },
+        {
+          "name": "Ankit Saraswat",
+          "phone": "7906820322",
+          "role": "Technical Coordinator"
+        }
+      ],
+      "instagram": "@Hack4Tech.GLAU",
+      "description": "VisionX is Hack4Tech's flagship 8-hour sprint hackathon where bold ideas meet high-octane engineering. Compete across 4 cutting-edge domains: AI/ML, Cloud, Cyber Security, and Web Dev. Build innovative prototypes, pitch to elite industry judges, and take home a share of the ₹25,000+ prize pool. Refreshments, goodie bags, and official university leave will be granted to all verified attendees.",
+      "rules": [
+        "Teams can comprise 1 to 4 members from any department or year.",
+        "All code must be written during the 8-hour hackathon duration. Pre-built templates/libraries are allowed for boilerplate only.",
+        "Participants must bring their own laptops, chargers, and essential hardware (BYOD).",
+        "High-speed campus Wi-Fi and power strips will be provided at every workstation.",
+        "QR Event Passes must be presented at the AB-11 security desk for check-in and breakfast kit collection."
+      ]
+    },
+    {
+      "id": "ravenx-2026",
+      "title": "RAVENX",
+      "tagline": "HER POWER. HER CODE. HER FUTURE.",
+      "subtitle": "GIRLS ONLY HACKATHON",
+      "theme": "gothic-purple",
+      "category": "Hackathon",
+      "status": "open",
+      "organization": "GLA University, Office of Students' Welfare & Hack4Tech (Powered by Unstop)",
+      "poster": "/images/ravenx.jpg",
+      "date": "26 November, 2026",
+      "dateIso": "2026-11-26",
+      "time": "09:00 AM – 05:00 PM",
+      "duration": "8 Hours of Code & Chaos",
+      "venue": "CSED Block, AB-II, GLA University, Mathura",
+      "prizePool": "₹50,000 Worth",
+      "prizePoolValue": 50000,
+      "registrationFee": 99,
+      "feeText": "₹99 / Person (Only for Shortlisted Teams Post Pre-screening)",
+      "teamType": "team_only",
+      "minTeamSize": 2,
+      "maxTeamSize": 4,
+      "genderRestriction": "girls_only",
+      "eligibility": "Exclusively for Female students across all colleges and universities. Team size: 2 to 4 members.",
+      "domains": [
+        "Fintech & Security",
+        "Healthcare & Biotech",
+        "EdTech & Accessibility",
+        "Open Innovation / AI"
+      ],
+      "perks": [
+        "₹50,000 Worth Mega Prize Pool & Direct Unstop Opportunities",
+        "Custom RavenX Gothic-Edition Swag Bags & Badges",
+        "Official NAAC A+ Certified Merit & Participation Certificates",
+        "Full Day Meals, High Tea & Midnight Snacks",
+        "Direct Mentorship with Leading Women Leaders in Tech"
+      ],
+      "coordinators": [
+        {
+          "name": "Hack4Tech Team",
+          "phone": "9368322158",
+          "role": "Women in Tech Lead"
+        },
+        {
+          "name": "Event Desk",
+          "phone": "7906820322",
+          "role": "Student Welfare Desk"
+        }
+      ],
+      "instagram": "@Hack4Tech.GLAU",
+      "description": "RavenX is an electrifying celebration of women creators, developers, and visionaries. Powered by Unstop in partnership with Hack4Tech GLA University, RavenX invites teams of 2 to 4 female developers for 8 hours of intense coding, chaos, and breakthrough innovation. Compete for a massive ₹50,000 worth prize pool, exclusive gothic swag, and career fast-tracks.",
+      "rules": [
+        "Exclusively for female participants. Inter-college teams and cross-year teams are warmly encouraged.",
+        "Strict team size: 2 to 4 members.",
+        "Round 1: Free online ideation submission. Round 2 (Offline Hackathon at AB-II): ₹99/person fee applies only upon shortlist notification.",
+        "Mentors will conduct regular progress check-ins at hours 2, 4, and 6.",
+        "Unique QR Pass is strictly required for campus entry and kit claim."
+      ]
+    },
+    {
+      "id": "ignix-2026",
+      "title": "Ignix 2.0",
+      "tagline": "THE HACKATHON PLAYBOOK",
+      "subtitle": "STRATEGY, IDEATION & PROTOTYPING MASTERCLASS",
+      "theme": "synth-glow",
+      "category": "Workshop",
+      "status": "open",
+      "organization": "GLA University - Office of Students' Welfare & Hack4Tech (H4T)",
+      "poster": "/images/ignix.jpg",
+      "date": "23 October, 2026",
+      "dateIso": "2026-10-23",
+      "time": "01:00 PM – 05:00 PM",
+      "duration": "4 Hours",
+      "venue": "Room 5046, AB 12, GLA University, Mathura",
+      "prizePool": "Goodies & Fast-Track Access",
+      "prizePoolValue": 5000,
+      "registrationFee": 69,
+      "feeText": "₹69 / Person",
+      "teamType": "individual_or_team",
+      "minTeamSize": 1,
+      "maxTeamSize": 2,
+      "genderRestriction": "all",
+      "eligibility": "Open to all students eager to master hackathons, rapid prototyping, Git workflows, and winning pitches.",
+      "domains": [
+        "Hackathon Winning Frameworks",
+        "Rapid MVP Architecture",
+        "Pitching & Presentation Secrets",
+        "Hands-on BYOD Sprint"
+      ],
+      "perks": [
+        "Official Hack4Tech Goodies & Sticker Packs",
+        "Recognized Training Certificates",
+        "Official Leave Approval Provided for Class Hours",
+        "Free Access to H4T Resource Library & Boilerplate Repos",
+        "Snack Boxes & Networking Session"
+      ],
+      "coordinators": [
+        {
+          "name": "Hack4Tech Team",
+          "phone": "9368322158",
+          "role": "Workshop Lead"
+        },
+        {
+          "name": "Student Welfare",
+          "phone": "7906820322",
+          "role": "Registrations Desk"
+        }
+      ],
+      "instagram": "@Hack4Tech.GLAU",
+      "description": "\"The world is full of possibilities — bring your ideas, your curiosity, and your courage to build.\" Ignix 2.0 is the definitive Hackathon Playbook bootcamp. Designed by seasoned national hackathon winners, this 4-hour hands-on masterclass teaches you how to ideate winning concepts, assemble killer MVPs under tight deadlines, and pitch like a pro. Bring your own device (BYOD) and leave with ready-to-deploy frameworks.",
+      "rules": [
+        "BYOD: Participants must bring their own charged laptop.",
+        "Hands-on mini-challenges will be conducted during the session.",
+        "Official University Duty Leave will be issued to all who check in via QR code.",
+        "Certificates will be delivered to the registered email within 24 hours of session completion."
+      ]
+    }
+  ],
+  "registrations": [
+    {
+      "id": "reg-1795664516258",
+      "ticketId": "H4T-VIS-89925",
+      "eventId": "visionx-2026",
+      "registrationType": "individual",
+      "teamName": null,
+      "leaderName": "Bhaavya Tilhari",
+      "leaderEmail": "bhaavyatilhari3498@gmail.com",
+      "leaderPhone": "09634755867",
+      "rollNo": "12515000408",
+      "department": "Computer Science & Engineering",
+      "year": "2nd Year",
+      "college": "GLA University, Mathura",
+      "members": [],
+      "status": "REGISTERED",
+      "checkedInAt": null,
+      "checkedInBy": null,
+      "notes": "",
+      "createdAt": "2026-11-26T03:41:56.258Z"
+    },
+    {
+      "id": "reg-1795233730385",
+      "ticketId": "H4T-VIS-24085",
+      "eventId": "visionx-2026",
+      "registrationType": "team",
+      "teamName": "TechTitans",
+      "leaderName": "Kunal Verma",
+      "leaderEmail": "kunal.v@gla.ac.in",
+      "leaderPhone": "9988776655",
+      "rollNo": "2115000999",
+      "department": "CSE",
+      "year": "3rd Year",
+      "college": "GLA University, Mathura",
+      "members": [
+        {
+          "name": "Neha Roy",
+          "email": "neha.r@gla.ac.in",
+          "phone": "9988776654"
+        }
+      ],
+      "status": "CHECKED_IN",
+      "checkedInAt": "2026-11-21T04:02:10.400Z",
+      "checkedInBy": "Station Alpha",
+      "notes": "",
+      "createdAt": "2026-11-21T04:02:10.385Z"
+    },
+    {
+      "id": "reg-demo-1",
+      "ticketId": "H4T-VX-91823",
+      "eventId": "visionx-2026",
+      "registrationType": "team",
+      "teamName": "CyberKnights",
+      "leaderName": "Aryan Sharma",
+      "leaderEmail": "aryan.sharma@gla.ac.in",
+      "leaderPhone": "9876543210",
+      "rollNo": "2115000101",
+      "department": "Computer Science & Engineering",
+      "year": "3rd Year",
+      "college": "GLA University",
+      "members": [
+        {
+          "name": "Rohan Verma",
+          "email": "rohan.v@gla.ac.in",
+          "phone": "9876543211",
+          "rollNo": "2115000102",
+          "branch": "CSE"
+        },
+        {
+          "name": "Priya Gupta",
+          "email": "priya.g@gla.ac.in",
+          "phone": "9876543212",
+          "rollNo": "2115000103",
+          "branch": "CSE - AI/ML"
+        }
+      ],
+      "status": "CHECKED_IN",
+      "checkedInAt": "2026-11-21T08:45:12.000Z",
+      "checkedInBy": "Main Gate Station 1",
+      "notes": "Verified ID cards. Refreshment tokens issued.",
+      "createdAt": "2026-11-18T10:30:00.000Z"
+    },
+    {
+      "id": "reg-demo-2",
+      "ticketId": "H4T-RX-48201",
+      "eventId": "ravenx-2026",
+      "registrationType": "team",
+      "teamName": "ByteQueens",
+      "leaderName": "Ananya Joshi",
+      "leaderEmail": "ananya.joshi@gla.ac.in",
+      "leaderPhone": "9898989898",
+      "rollNo": "2215000450",
+      "department": "Computer Science & Engineering",
+      "year": "2nd Year",
+      "college": "GLA University",
+      "members": [
+        {
+          "name": "Sneha Patel",
+          "email": "sneha.p@gla.ac.in",
+          "phone": "9898989899",
+          "rollNo": "2215000451",
+          "branch": "IT"
+        },
+        {
+          "name": "Kavya Singh",
+          "email": "kavya.s@gla.ac.in",
+          "phone": "9898989890",
+          "rollNo": "2215000452",
+          "branch": "Cyber Security"
+        }
+      ],
+      "status": "REGISTERED",
+      "checkedInAt": null,
+      "checkedInBy": null,
+      "notes": "Shortlisted team - fee paid",
+      "createdAt": "2026-11-19T14:15:00.000Z"
+    },
+    {
+      "id": "reg-demo-3",
+      "ticketId": "H4T-IX-30219",
+      "eventId": "ignix-2026",
+      "registrationType": "individual",
+      "teamName": null,
+      "leaderName": "Devansh Dixit",
+      "leaderEmail": "devansh.dixit@gla.ac.in",
+      "leaderPhone": "9765432109",
+      "rollNo": "2315000789",
+      "department": "Computer Applications (BCA)",
+      "year": "1st Year",
+      "college": "GLA University",
+      "members": [],
+      "status": "LATE",
+      "checkedInAt": "2026-11-21T09:12:44.000Z",
+      "checkedInBy": "Room 5046 Desk",
+      "notes": "Late arrival marked due to prior lab exam",
+      "createdAt": "2026-11-19T16:20:00.000Z"
+    },
+    {
+      "id": "reg-demo-4",
+      "ticketId": "H4T-VX-55412",
+      "eventId": "visionx-2026",
+      "registrationType": "individual",
+      "teamName": null,
+      "leaderName": "Tanvi Saxena",
+      "leaderEmail": "tanvi.saxena@gla.ac.in",
+      "leaderPhone": "9123456789",
+      "rollNo": "2115000888",
+      "department": "ECE",
+      "year": "4th Year",
+      "college": "GLA University",
+      "members": [],
+      "status": "REGISTERED",
+      "checkedInAt": null,
+      "checkedInBy": null,
+      "notes": null,
+      "createdAt": "2026-11-20T11:00:00.000Z"
+    }
+  ],
+  "checkInLogs": [
+    {
+      "id": "log-1795233730416",
+      "ticketId": "H4T-VIS-24085",
+      "eventId": "visionx-2026",
+      "attendeeName": "Kunal Verma (TechTitans)",
+      "teamName": "TechTitans",
+      "type": "DUPLICATE_ATTEMPT",
+      "statusRecorded": "BLOCKED",
+      "timestamp": "2026-11-21T04:02:10.416Z",
+      "station": "Station Beta",
+      "message": "Warning: Duplicate scan attempt for H4T-VIS-24085 (Kunal Verma). Originally checked in at 2026-11-21T04:02:10.400Z."
+    },
+    {
+      "id": "log-1795233730400",
+      "ticketId": "H4T-VIS-24085",
+      "eventId": "visionx-2026",
+      "attendeeName": "Kunal Verma (TechTitans)",
+      "teamName": "TechTitans",
+      "type": "FIRST_SCAN",
+      "statusRecorded": "CHECKED_IN",
+      "timestamp": "2026-11-21T04:02:10.400Z",
+      "station": "Station Alpha",
+      "message": "Check-in verified: Kunal Verma (H4T-VIS-24085)"
+    },
+    {
+      "id": "log-1795233730376",
+      "ticketId": "H4T-VX-91823",
+      "eventId": "visionx-2026",
+      "attendeeName": "Aryan Sharma (CyberKnights)",
+      "teamName": "CyberKnights",
+      "type": "DUPLICATE_ATTEMPT",
+      "statusRecorded": "BLOCKED",
+      "timestamp": "2026-11-21T04:02:10.376Z",
+      "station": "Station Test",
+      "message": "Warning: Duplicate scan attempt for H4T-VX-91823 (Aryan Sharma). Originally checked in at 2026-11-21T08:45:12.000Z."
+    },
+    {
+      "id": "log-1",
+      "ticketId": "H4T-VX-91823",
+      "eventId": "visionx-2026",
+      "attendeeName": "Aryan Sharma (CyberKnights)",
+      "teamName": "CyberKnights",
+      "type": "FIRST_SCAN",
+      "statusRecorded": "CHECKED_IN",
+      "timestamp": "2026-11-21T08:45:12.000Z",
+      "station": "Main Gate Station 1",
+      "message": "Successful check-in: Team CyberKnights (3 members)"
+    },
+    {
+      "id": "log-2",
+      "ticketId": "H4T-IX-30219",
+      "eventId": "ignix-2026",
+      "attendeeName": "Devansh Dixit",
+      "teamName": null,
+      "type": "MANUAL_OVERRIDE",
+      "statusRecorded": "LATE",
+      "timestamp": "2026-11-21T09:12:44.000Z",
+      "station": "Room 5046 Desk",
+      "message": "Marked late arrival by Admin"
+    }
+  ],
+  "adminUsers": [
+    {
+      "email": "admin@hack4tech.com",
+      "password": "admin123",
+      "name": "H4T Lead Organizer",
+      "role": "Super Admin"
+    }
+  ]
+}
