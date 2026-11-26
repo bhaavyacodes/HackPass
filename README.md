@@ -1,11 +1,11 @@
-# ⚡ EVENTHUB — Smart Event Management System (EMS 2.0)
+# ⚡ HACKPASS — Smart Event Management System 
 ### Official Centralized Event Ecosystem for **HACK4TECH (H4T)**
 #### GLA University (NAAC A+ Accredited) • Office of Students' Welfare
 
 ---
 
 ## 🌟 Overview
-**EVENTHUB** is a high-performance, real-time Event Management System engineered specifically for **Hack4Tech** at GLA University. It empowers students to explore flagship tech events, register individually or in multi-member teams, generate cryptographically signed QR-based event passes, and enables event organizers and volunteers to manage registrations and verify live gate attendance through a cyber-themed administrative terminal with automated duplicate check-in prevention.
+**HACKPASS** is a high-performance, real-time Event Management System engineered specifically for **Hack4Tech** at GLA University. It empowers students to explore flagship tech events, register individually or in multi-member teams, generate cryptographically signed QR-based event passes, and enables event organizers and volunteers to manage registrations and verify live gate attendance through a cyber-themed administrative terminal with automated duplicate check-in prevention.
 
 ---
 
