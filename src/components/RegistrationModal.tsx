@@ -165,16 +165,16 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
           
           {/* Error Message */}
           {errorMessage && (
-            <div className="p-4 rounded-xl bg-red-950/70 border border-red-800 text-red-200 text-xs sm:text-sm flex flex-col gap-2">
+            <div className="p-4 rounded-xl bg-red-50 border border-red-200 text-red-800 text-xs sm:text-sm flex flex-col gap-2">
               <div className="flex items-center gap-2 font-semibold">
-                <ShieldAlert className="w-4 h-4 text-red-400 shrink-0" />
+                <ShieldAlert className="w-4 h-4 text-red-700 shrink-0" />
                 <span>{errorMessage}</span>
               </div>
               {existingPassData && onViewExistingTicket && (
                 <button
                   type="button"
                   onClick={() => onViewExistingTicket(existingPassData.ticketId)}
-                  className="mt-1 self-start px-3 py-1.5 rounded-lg bg-red-900/60 hover:bg-red-800 text-xs font-semibold text-white border border-red-700 transition-all"
+                  className="mt-1 self-start px-3 py-1.5 rounded-lg bg-red-100 hover:bg-red-200 text-xs font-semibold text-red-800 border border-red-200 transition-all"
                 >
                   View My Existing Event Pass ({existingPassData.ticketId}) →
                 </button>
@@ -223,9 +223,9 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
           {/* Team Name (if team) */}
           {registrationType === 'team' && (
             <div className="space-y-1.5">
-              <label className="text-xs font-semibold text-gray-300 flex items-center justify-between">
+              <label className="text-xs font-semibold text-purple-950 flex items-center justify-between">
                 <span>Team Name *</span>
-                <span className="text-[11px] text-cyan-400 font-mono">
+                <span className="text-[11px] text-purple-700 font-mono">
                   {1 + members.length} / {event.maxTeamSize} Members
                 </span>
               </label>
@@ -235,73 +235,73 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                 placeholder="e.g. Nexus Innovators, CyberKnights"
                 value={teamName}
                 onChange={(e) => setTeamName(e.target.value)}
-                className="w-full px-4 py-2.5 rounded-xl bg-gray-900/80 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400 text-sm"
+                className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-purple-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-purple-600 text-sm"
               />
             </div>
           )}
 
           {/* Section: Leader / Primary Contact Details */}
-          <div className="space-y-4 pt-2 border-t border-gray-800">
-            <h4 className="text-sm font-bold text-white font-display flex items-center gap-2">
-              <User className="w-4 h-4 text-cyan-400" />
+          <div className="space-y-4 pt-2 border-t border-purple-200">
+            <h4 className="text-sm font-bold text-purple-950 font-display flex items-center gap-2">
+              <User className="w-4 h-4 text-purple-600" />
               <span>{registrationType === 'team' ? 'Team Leader Details' : 'Participant Details'}</span>
             </h4>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="text-xs text-gray-400 block mb-1">Full Name *</label>
+                <label className="text-xs text-slate-600 block mb-1">Full Name *</label>
                 <input
                   type="text"
                   required
                   placeholder="Aryan Sharma"
                   value={leaderName}
                   onChange={(e) => setLeaderName(e.target.value)}
-                  className="w-full px-3.5 py-2 rounded-xl bg-gray-900/80 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400 text-sm"
+                  className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-purple-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-purple-600 text-sm"
                 />
               </div>
 
               <div>
-                <label className="text-xs text-gray-400 block mb-1">College Email Address *</label>
+                <label className="text-xs text-slate-600 block mb-1">College Email Address *</label>
                 <input
                   type="email"
                   required
                   placeholder="name.rollno@gla.ac.in"
                   value={leaderEmail}
                   onChange={(e) => setLeaderEmail(e.target.value)}
-                  className="w-full px-3.5 py-2 rounded-xl bg-gray-900/80 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400 text-sm"
+                  className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-purple-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-purple-600 text-sm"
                 />
               </div>
 
               <div>
-                <label className="text-xs text-gray-400 block mb-1">WhatsApp / Contact Phone *</label>
+                <label className="text-xs text-slate-600 block mb-1">WhatsApp / Contact Phone *</label>
                 <input
                   type="tel"
                   required
                   placeholder="9876543210"
                   value={leaderPhone}
                   onChange={(e) => setLeaderPhone(e.target.value)}
-                  className="w-full px-3.5 py-2 rounded-xl bg-gray-900/80 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400 text-sm"
+                  className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-purple-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-purple-600 text-sm"
                 />
               </div>
 
               <div>
-                <label className="text-xs text-gray-400 block mb-1">University Roll Number *</label>
+                <label className="text-xs text-slate-600 block mb-1">University Roll Number *</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. 2115000101"
                   value={rollNo}
                   onChange={(e) => setRollNo(e.target.value)}
-                  className="w-full px-3.5 py-2 rounded-xl bg-gray-900/80 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400 text-sm"
+                  className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-purple-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-purple-600 text-sm"
                 />
               </div>
 
               <div>
-                <label className="text-xs text-gray-400 block mb-1">Department / Branch</label>
+                <label className="text-xs text-slate-600 block mb-1">Department / Branch</label>
                 <select
                   value={department}
                   onChange={(e) => setDepartment(e.target.value)}
-                  className="w-full px-3.5 py-2 rounded-xl bg-gray-900/80 border border-gray-700 text-white focus:outline-none focus:border-cyan-400 text-sm"
+                  className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-purple-200 text-slate-900 focus:outline-none focus:border-purple-600 text-sm"
                 >
                   <option value="Computer Science & Engineering">Computer Science & Engineering (CSE)</option>
                   <option value="CSE - Artificial Intelligence & ML">CSE - AI & ML</option>
@@ -317,11 +317,11 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
               </div>
 
               <div>
-                <label className="text-xs text-gray-400 block mb-1">Academic Year</label>
+                <label className="text-xs text-slate-600 block mb-1">Academic Year</label>
                 <select
                   value={year}
                   onChange={(e) => setYear(e.target.value)}
-                  className="w-full px-3.5 py-2 rounded-xl bg-gray-900/80 border border-gray-700 text-white focus:outline-none focus:border-cyan-400 text-sm"
+                  className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-purple-200 text-slate-900 focus:outline-none focus:border-purple-600 text-sm"
                 >
                   <option value="1st Year">1st Year</option>
                   <option value="2nd Year">2nd Year</option>
@@ -331,12 +331,12 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
               </div>
 
               <div className="sm:col-span-2">
-                <label className="text-xs text-gray-400 block mb-1">University / Institute</label>
+                <label className="text-xs text-slate-600 block mb-1">University / Institute</label>
                 <input
                   type="text"
                   value={college}
                   onChange={(e) => setCollege(e.target.value)}
-                  className="w-full px-3.5 py-2 rounded-xl bg-gray-900/80 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400 text-sm"
+                  className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-purple-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-purple-600 text-sm"
                 />
               </div>
             </div>
@@ -344,14 +344,14 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
 
           {/* Section: Dynamic Additional Team Members */}
           {registrationType === 'team' && (
-            <div className="space-y-4 pt-2 border-t border-gray-800">
+            <div className="space-y-4 pt-2 border-t border-purple-200">
               <div className="flex items-center justify-between">
                 <div>
-                  <h4 className="text-sm font-bold text-white font-display flex items-center gap-2">
-                    <Users className="w-4 h-4 text-purple-400" />
+                  <h4 className="text-sm font-bold text-purple-950 font-display flex items-center gap-2">
+                    <Users className="w-4 h-4 text-purple-600" />
                     <span>Additional Team Members</span>
                   </h4>
-                  <p className="text-xs text-gray-400">
+                  <p className="text-xs text-slate-600">
                     Add between {event.minTeamSize - 1} and {event.maxTeamSize - 1} additional members.
                   </p>
                 </div>
@@ -360,7 +360,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                   <button
                     type="button"
                     onClick={handleAddMember}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 hover:bg-cyan-500/20 text-xs font-semibold transition-all"
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-pink-50 border border-purple-200 text-purple-800 hover:bg-pink-100 text-xs font-semibold transition-all"
                   >
                     <Plus className="w-3.5 h-3.5" />
                     <span>Add Member</span>
@@ -369,7 +369,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
               </div>
 
               {members.length === 0 && (
-                <div className="p-4 rounded-xl bg-gray-900/40 border border-dashed border-gray-800 text-center text-xs text-gray-400">
+                <div className="p-4 rounded-xl bg-pink-50 border border-dashed border-purple-200 text-center text-xs text-slate-600">
                   No additional members added yet. Click "+ Add Member" to include teammates.
                 </div>
               )}
@@ -377,7 +377,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
               {members.map((member, idx) => (
                 <div
                   key={idx}
-                  className="p-4 rounded-2xl bg-gray-900/60 border border-gray-800 relative space-y-3"
+                  className="p-4 rounded-2xl bg-white border border-purple-200 relative space-y-3"
                 >
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-mono font-bold text-cyan-400 uppercase">
@@ -386,7 +386,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                     <button
                       type="button"
                       onClick={() => handleRemoveMember(idx)}
-                      className="p-1 text-gray-500 hover:text-red-400 transition-colors"
+                      className="p-1 text-slate-500 hover:text-red-700 transition-colors"
                       title="Remove member"
                     >
                       <Trash2 className="w-4 h-4" />
@@ -401,7 +401,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                         placeholder="Member Full Name *"
                         value={member.name}
                         onChange={(e) => handleMemberChange(idx, 'name', e.target.value)}
-                        className="w-full px-3 py-1.5 rounded-lg bg-gray-800/80 border border-gray-700 text-white text-xs focus:outline-none focus:border-cyan-400"
+                        className="w-full px-3 py-1.5 rounded-lg bg-slate-50 border border-purple-200 text-slate-900 text-xs focus:outline-none focus:border-purple-600"
                       />
                     </div>
                     <div>
@@ -411,7 +411,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                         placeholder="Member Email *"
                         value={member.email}
                         onChange={(e) => handleMemberChange(idx, 'email', e.target.value)}
-                        className="w-full px-3 py-1.5 rounded-lg bg-gray-800/80 border border-gray-700 text-white text-xs focus:outline-none focus:border-cyan-400"
+                        className="w-full px-3 py-1.5 rounded-lg bg-slate-50 border border-purple-200 text-slate-900 text-xs focus:outline-none focus:border-purple-600"
                       />
                     </div>
                     <div>
@@ -421,7 +421,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                         placeholder="Member Phone *"
                         value={member.phone}
                         onChange={(e) => handleMemberChange(idx, 'phone', e.target.value)}
-                        className="w-full px-3 py-1.5 rounded-lg bg-gray-800/80 border border-gray-700 text-white text-xs focus:outline-none focus:border-cyan-400"
+                        className="w-full px-3 py-1.5 rounded-lg bg-slate-50 border border-purple-200 text-slate-900 text-xs focus:outline-none focus:border-purple-600"
                       />
                     </div>
                     <div>
@@ -430,7 +430,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                         placeholder="University Roll Number"
                         value={member.rollNo || ''}
                         onChange={(e) => handleMemberChange(idx, 'rollNo', e.target.value)}
-                        className="w-full px-3 py-1.5 rounded-lg bg-gray-800/80 border border-gray-700 text-white text-xs focus:outline-none focus:border-cyan-400"
+                        className="w-full px-3 py-1.5 rounded-lg bg-slate-50 border border-purple-200 text-slate-900 text-xs focus:outline-none focus:border-purple-600"
                       />
                     </div>
                   </div>
@@ -440,29 +440,29 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
           )}
 
           {/* Acknowledgments & Restrictions */}
-          <div className="space-y-3 pt-2 border-t border-gray-800 text-xs">
+          <div className="space-y-3 pt-2 border-t border-purple-200 text-xs">
             {isRavenX && (
-              <label className="flex items-start gap-2.5 p-3 rounded-xl bg-purple-950/40 border border-purple-800/60 cursor-pointer">
+              <label className="flex items-start gap-2.5 p-3 rounded-xl bg-purple-50 border border-purple-200 cursor-pointer">
                 <input
                   type="checkbox"
                   checked={girlsOnlyConfirmed}
                   onChange={(e) => setGirlsOnlyConfirmed(e.target.checked)}
-                  className="mt-0.5 rounded text-purple-500 focus:ring-purple-400 h-4 w-4 bg-gray-900 border-gray-700"
+                  className="mt-0.5 rounded text-purple-600 focus:ring-purple-400 h-4 w-4 bg-white border-purple-300"
                 />
-                <span className="text-purple-200">
-                  <strong className="text-white font-semibold">RavenX Eligibility:</strong> I confirm that all team members are female students eligible for this Girls-Only Hackathon.
+                <span className="text-purple-800">
+                  <strong className="text-purple-950 font-semibold">RavenX Eligibility:</strong> I confirm that all team members are female students eligible for this Girls-Only Hackathon.
                 </span>
               </label>
             )}
 
-            <label className="flex items-start gap-2.5 p-3 rounded-xl bg-gray-900/60 border border-gray-800 cursor-pointer">
+            <label className="flex items-start gap-2.5 p-3 rounded-xl bg-pink-50 border border-purple-200 cursor-pointer">
               <input
                 type="checkbox"
                 checked={byodAgreement}
                 onChange={(e) => setByodAgreement(e.target.checked)}
-                className="mt-0.5 rounded text-cyan-500 focus:ring-cyan-400 h-4 w-4 bg-gray-900 border-gray-700"
+                className="mt-0.5 rounded text-purple-600 focus:ring-purple-400 h-4 w-4 bg-white border-purple-300"
               />
-              <span className="text-gray-300">
+              <span className="text-purple-900">
                 I agree to the Hack4Tech code of conduct, bring my own device (BYOD), and show the QR Pass at AB-11/AB-II reception.
               </span>
             </label>
