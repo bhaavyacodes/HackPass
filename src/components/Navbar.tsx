@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { QrCode, Ticket, Shield, Calendar, Menu, X, Sparkles, LogOut, Lock, UserCheck, ArrowRight } from 'lucide-react';
+import { QrCode, Ticket, Shield, Calendar, Menu, X, LogOut, Lock, UserCheck, ArrowRight } from 'lucide-react';
 
 interface NavbarProps {
   currentTab: string;
@@ -21,40 +21,40 @@ export const Navbar: React.FC<NavbarProps> = ({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-purple-100 shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-purple-100 shadow-sm w-full">
+      <div className="w-full px-4 sm:px-8 lg:px-12">
         <div className="flex items-center justify-between h-20">
           
           {/* ======================================================== */}
-          {/* LEFT SECTION: 1. GLA UNIVERSITY LOGO, 2. H4T LOGO */}
+          {/* FAR LEFT: 1. GLA UNIVERSITY WHITE LOGO, 2. H4T LOGO */}
           {/* ======================================================== */}
-          <div className="flex items-center gap-3 sm:gap-4 shrink-0">
+          <div className="flex items-center gap-3 sm:gap-5 shrink-0">
             
-            {/* 1. Leftmost: Official GLA University NAAC A+ Logo */}
+            {/* 1. Far Leftmost: Official GLA University White Crest Logo */}
             <a 
               href="https://www.gla.ac.in" 
               target="_blank" 
               rel="noreferrer" 
-              className="flex items-center p-1 rounded-xl bg-purple-50/60 hover:bg-purple-100/60 border border-purple-200/80 transition-all duration-300"
-              title="GLA University • Accredited with A+ Grade by NAAC"
+              className="flex items-center transition-transform duration-300 hover:scale-105"
+              title="GLA University"
             >
               <img 
-                src="/images/gla_naac.jpg" 
-                alt="GLA University NAAC A+ Crest" 
-                className="h-10 sm:h-11 w-auto object-contain rounded-lg"
+                src="/images/gla_white.jpg" 
+                alt="GLA University" 
+                className="h-11 sm:h-12 w-auto object-contain"
               />
             </a>
 
-            {/* Subtle Divider */}
+            {/* Subtle Vertical Divider */}
             <div className="h-8 w-px bg-purple-200"></div>
 
-            {/* 2. Towards its immediate right: H4T Logo & HACKPASS Brand */}
+            {/* 2. Immediate Right: H4T Logo & HackPass Brand */}
             <div 
               onClick={() => setCurrentTab('events')} 
               className="flex items-center gap-2.5 sm:gap-3 cursor-pointer group"
             >
               <div className="relative">
-                <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full overflow-hidden p-0.5 bg-white border-2 border-purple-400 shadow-pastel-purple transition-transform duration-300 group-hover:scale-105">
+                <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full overflow-hidden p-0.5 bg-white border-2 border-purple-400 shadow-pastel-purple transition-transform duration-300 group-hover:scale-110">
                   <img 
                     src="/images/logo.jpg" 
                     alt="Hack4Tech Logo" 
@@ -69,15 +69,15 @@ export const Navbar: React.FC<NavbarProps> = ({
 
               <div className="flex flex-col">
                 <div className="flex items-center gap-1.5">
-                  <span className="text-base sm:text-lg font-display font-extrabold tracking-tight text-purple-950 group-hover:text-purple-700 transition-colors">
-                    HACKPASS
+                  <span className="text-lg sm:text-xl font-display font-black tracking-tight text-purple-950 transition-all duration-300 group-hover:text-pink-600">
+                    HackPass
                   </span>
                   <span className="px-1.5 py-0.2 text-[9px] font-bold font-mono uppercase bg-purple-100 text-purple-700 border border-purple-200 rounded">
                     H4T
                   </span>
                 </div>
                 <span className="text-[10px] sm:text-[11px] font-mono text-slate-500">
-                  Smart Event Management
+                  GLA University
                 </span>
               </div>
             </div>
@@ -85,37 +85,38 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           {/* ======================================================== */}
-          {/* MIDDLE: ENOUGH GAP / SPACER */}
+          {/* MIDDLE: SPACIOUS GAP / FLEX-1 FILL */}
           {/* ======================================================== */}
           <div className="flex-1"></div>
 
           {/* ======================================================== */}
-          {/* RIGHT SECTION: OPTIONS + RIGHTMOST ADMIN / PORTAL */}
+          {/* RIGHT SECTION: NAV OPTIONS + RIGHTMOST PORTAL LOGIN */}
           {/* ======================================================== */}
           <nav className="hidden md:flex items-center gap-2 lg:gap-3 shrink-0">
             
-            {/* Immediate left of Admin Dashboard: "Explore Events" & "Find My Pass" */}
+            {/* Immediate left of Admin Dashboard: "Explore Events" */}
             <button
               onClick={() => setCurrentTab('events')}
-              className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all duration-300 ${
                 currentTab === 'events'
-                  ? 'bg-purple-100/90 text-purple-900 border border-purple-300 shadow-sm'
-                  : 'text-slate-600 hover:text-purple-800 hover:bg-purple-50'
+                  ? 'bg-purple-700 text-white shadow-sm'
+                  : 'text-slate-600 hover:bg-pink-500 hover:text-white'
               }`}
             >
-              <Calendar className="w-4 h-4 text-purple-600" />
+              <Calendar className="w-4 h-4" />
               <span>Explore Events</span>
             </button>
 
+            {/* "Find My Pass" with playful hover color exchange */}
             <button
               onClick={() => setCurrentTab('find-pass')}
-              className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all duration-300 ${
                 currentTab === 'find-pass'
-                  ? 'bg-pink-100/90 text-pink-900 border border-pink-300 shadow-sm'
-                  : 'text-slate-600 hover:text-pink-800 hover:bg-pink-50'
+                  ? 'bg-pink-600 text-white shadow-sm'
+                  : 'text-slate-600 hover:bg-pink-500 hover:text-white'
               }`}
             >
-              <Ticket className="w-4 h-4 text-pink-600" />
+              <Ticket className="w-4 h-4" />
               <span>Find My Pass</span>
             </button>
 
@@ -123,10 +124,10 @@ export const Navbar: React.FC<NavbarProps> = ({
             {(isVolunteerLoggedIn || isAdminLoggedIn) && (
               <button
                 onClick={() => setCurrentTab('scanner')}
-                className={`flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold transition-all duration-200 ${
+                className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold transition-all duration-300 ${
                   currentTab === 'scanner'
-                    ? 'bg-purple-600 text-white shadow-md'
-                    : 'bg-purple-50 text-purple-800 hover:bg-purple-100 border border-purple-200'
+                    ? 'bg-purple-900 text-white shadow-md'
+                    : 'bg-purple-50 text-purple-800 hover:bg-pink-500 hover:text-white border border-purple-200'
                 }`}
               >
                 <QrCode className="w-3.5 h-3.5" />
@@ -137,13 +138,13 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             {/* RIGHTMOST: ADMIN DASHBOARD / PORTAL LOGIN */}
             {isAdminLoggedIn ? (
-              <div className="flex items-center gap-2 pl-1 border-l border-purple-200">
+              <div className="flex items-center gap-2 pl-2 border-l border-purple-200">
                 <button
                   onClick={() => setCurrentTab('admin')}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all shadow-pastel-purple ${
+                  className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all duration-300 shadow-pastel-purple ${
                     currentTab === 'admin'
                       ? 'bg-purple-900 text-white border border-purple-950'
-                      : 'bg-purple-700 hover:bg-purple-800 text-white'
+                      : 'bg-purple-700 hover:bg-pink-600 text-white'
                   }`}
                 >
                   <Shield className="w-4 h-4" />
@@ -153,13 +154,13 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <button
                   onClick={onLogout}
                   title="Logout"
-                  className="p-2 rounded-xl text-slate-400 hover:text-red-600 hover:bg-red-50 border border-transparent hover:border-red-200 transition-colors"
+                  className="p-2 rounded-xl text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors"
                 >
                   <LogOut className="w-4 h-4" />
                 </button>
               </div>
             ) : isVolunteerLoggedIn ? (
-              <div className="flex items-center gap-2 pl-1 border-l border-purple-200">
+              <div className="flex items-center gap-2 pl-2 border-l border-purple-200">
                 <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-pink-50 border border-pink-200 text-xs font-semibold text-pink-800">
                   <UserCheck className="w-3.5 h-3.5 text-pink-600" />
                   <span>Gate Volunteer</span>
@@ -176,7 +177,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             ) : (
               <button
                 onClick={onOpenLoginModal}
-                className="flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-purple-700 hover:bg-purple-800 text-white shadow-pastel-purple hover:shadow-pastel-hover transition-all duration-200 group"
+                className="flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-purple-700 hover:bg-pink-600 text-white shadow-pastel-purple transition-all duration-300 group"
               >
                 <Lock className="w-3.5 h-3.5" />
                 <span>Admin / Volunteer Portal</span>

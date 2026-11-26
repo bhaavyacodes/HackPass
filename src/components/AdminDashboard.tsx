@@ -21,7 +21,10 @@ import {
   TrendingUp,
   AlertTriangle,
   IndianRupee,
-  Layers
+  Layers,
+  MapPin,
+  Trophy,
+  Ticket
 } from 'lucide-react';
 import { EventItem, Registration, StatsData, CheckInLog } from '../types';
 import { api } from '../services/api';
@@ -167,41 +170,44 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+    <div className="w-full px-4 sm:px-8 lg:px-12 py-8 space-y-8 animate-in fade-in duration-300">
       
       {/* Top Banner & Tab Navigation */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-gray-800 pb-6">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-purple-200 pb-6">
         <div>
           <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-cyan-400"></span>
-            <span className="text-xs font-mono font-bold uppercase tracking-wider text-cyan-400">
+            <span className="w-2.5 h-2.5 rounded-full bg-pink-500 animate-pulse"></span>
+            <span className="text-xs font-mono font-bold uppercase tracking-wider text-purple-700 bg-purple-100/80 px-2.5 py-0.5 rounded-full border border-purple-200">
               Admin Control Center
             </span>
-            <span className="text-gray-600">•</span>
-            <span className="text-xs font-mono text-gray-400">Logged in as admin@hack4tech.com</span>
+            <span className="text-purple-300">•</span>
+            <span className="text-xs font-mono text-slate-500">Logged in as admin@hack4tech.com</span>
           </div>
-          <h1 className="text-2xl sm:text-4xl font-extrabold font-display text-white mt-1">
+          <h1 className="text-2xl sm:text-4xl font-extrabold font-display text-purple-950 mt-1">
             Hack4Tech Command Hub
           </h1>
+          <p className="text-xs sm:text-sm text-slate-600 mt-0.5">
+            Real-time analytics, event coordination, registration management, and attendance verification.
+          </p>
         </div>
 
         <div className="flex flex-wrap items-center gap-3">
           <button
             onClick={loadData}
-            className="p-2.5 rounded-xl bg-gray-900 hover:bg-gray-800 border border-gray-800 text-gray-300 hover:text-white transition-all text-xs flex items-center gap-1.5"
+            className="p-2.5 rounded-xl bg-white hover:bg-purple-50 border border-purple-200 text-slate-700 hover:text-purple-950 transition-all text-xs flex items-center gap-1.5 shadow-sm"
             title="Refresh All Data"
           >
-            <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
-            <span className="hidden sm:inline">Refresh</span>
+            <RefreshCw className={`w-4 h-4 text-purple-600 ${loading ? 'animate-spin' : ''}`} />
+            <span className="hidden sm:inline font-semibold">Refresh</span>
           </button>
 
           <a
             href={api.getExportUrl(selectedEventId === 'all' ? undefined : selectedEventId, 'csv')}
             target="_blank"
             rel="noreferrer"
-            className="px-3.5 py-2 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs font-semibold flex items-center gap-1.5 transition-all"
+            className="px-3.5 py-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 text-xs font-bold flex items-center gap-1.5 transition-all shadow-sm"
           >
-            <FileSpreadsheet className="w-4 h-4 text-emerald-400" />
+            <FileSpreadsheet className="w-4 h-4 text-emerald-600" />
             <span>Export CSV</span>
           </a>
 
@@ -235,7 +241,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
               });
               setShowEventModal(true);
             }}
-            className="px-4 py-2 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-black font-bold text-xs shadow-neon-cyan transition-all flex items-center gap-1.5"
+            className="px-4 py-2 rounded-xl bg-purple-700 hover:bg-pink-600 text-white font-bold text-xs shadow-pastel-purple transition-all flex items-center gap-1.5"
           >
             <Plus className="w-4 h-4" />
             <span>Create Event</span>
@@ -243,7 +249,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
           <button
             onClick={onLogout}
-            className="p-2.5 rounded-xl bg-red-950/60 hover:bg-red-900 border border-red-800 text-red-200 transition-all text-xs"
+            className="p-2.5 rounded-xl bg-red-50 hover:bg-red-100 border border-red-200 text-red-700 transition-all text-xs"
             title="Log Out"
           >
             <LogOut className="w-4 h-4" />
@@ -251,14 +257,14 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
         </div>
       </div>
 
-      {/* Tabs */}
+      {/* Navigation Tabs */}
       <div className="flex items-center gap-2 overflow-x-auto pb-1">
         <button
           onClick={() => setActiveTab('overview')}
-          className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all shrink-0 ${
+          className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 ${
             activeTab === 'overview'
-              ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 shadow-sm'
-              : 'text-gray-400 hover:text-white hover:bg-gray-900'
+              ? 'bg-purple-700 text-white shadow-pastel-purple'
+              : 'bg-white text-slate-600 hover:text-purple-950 hover:bg-purple-50 border border-purple-200'
           }`}
         >
           <BarChart3 className="w-4 h-4" />
@@ -267,10 +273,10 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
         <button
           onClick={() => setActiveTab('registrations')}
-          className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all shrink-0 ${
+          className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 ${
             activeTab === 'registrations'
-              ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 shadow-sm'
-              : 'text-gray-400 hover:text-white hover:bg-gray-900'
+              ? 'bg-purple-700 text-white shadow-pastel-purple'
+              : 'bg-white text-slate-600 hover:text-purple-950 hover:bg-purple-50 border border-purple-200'
           }`}
         >
           <Users className="w-4 h-4" />
@@ -279,10 +285,10 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
         <button
           onClick={() => setActiveTab('events')}
-          className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all shrink-0 ${
+          className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 ${
             activeTab === 'events'
-              ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 shadow-sm'
-              : 'text-gray-400 hover:text-white hover:bg-gray-900'
+              ? 'bg-purple-700 text-white shadow-pastel-purple'
+              : 'bg-white text-slate-600 hover:text-purple-950 hover:bg-purple-50 border border-purple-200'
           }`}
         >
           <Calendar className="w-4 h-4" />
@@ -291,13 +297,13 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
         <button
           onClick={() => setActiveTab('logs')}
-          className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all shrink-0 ${
+          className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 ${
             activeTab === 'logs'
-              ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 shadow-sm'
-              : 'text-gray-400 hover:text-white hover:bg-gray-900'
+              ? 'bg-purple-700 text-white shadow-pastel-purple'
+              : 'bg-white text-slate-600 hover:text-purple-950 hover:bg-purple-50 border border-purple-200'
           }`}
         >
-          <ShieldAlert className="w-4 h-4 text-purple-400" />
+          <ShieldAlert className="w-4 h-4 text-pink-600" />
           <span>Audit Logs & Duplicate Alerts</span>
         </button>
       </div>
@@ -309,70 +315,78 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
         <div className="space-y-8 animate-in fade-in duration-200">
           
           {/* Top Metric Cards Grid */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             
-            <div className="p-5 rounded-3xl bg-[#0c101a] border border-gray-800 space-y-2">
-              <div className="flex items-center justify-between text-gray-400">
-                <span className="text-xs font-mono uppercase">Total Registrations</span>
-                <Users className="w-4 h-4 text-cyan-400" />
+            <div className="p-6 rounded-3xl bg-white border border-purple-200/90 shadow-pastel-card space-y-2">
+              <div className="flex items-center justify-between text-slate-500">
+                <span className="text-xs font-mono font-bold uppercase tracking-wider">Total Registrations</span>
+                <div className="w-8 h-8 rounded-xl bg-purple-100 flex items-center justify-center text-purple-700">
+                  <Users className="w-4 h-4" />
+                </div>
               </div>
-              <p className="text-2xl sm:text-3xl font-extrabold font-mono text-white">
+              <p className="text-3xl sm:text-4xl font-extrabold font-mono text-purple-950">
                 {stats?.totalRegistrations || 0}
               </p>
-              <div className="flex items-center gap-1.5 text-xs text-cyan-400">
+              <div className="flex items-center gap-1.5 text-xs text-purple-700 font-medium">
                 <TrendingUp className="w-3.5 h-3.5" />
                 <span>Across 3 Flagship Events</span>
               </div>
             </div>
 
-            <div className="p-5 rounded-3xl bg-[#0c101a] border border-gray-800 space-y-2">
-              <div className="flex items-center justify-between text-gray-400">
-                <span className="text-xs font-mono uppercase">Checked In</span>
-                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+            <div className="p-6 rounded-3xl bg-white border border-purple-200/90 shadow-pastel-card space-y-2">
+              <div className="flex items-center justify-between text-slate-500">
+                <span className="text-xs font-mono font-bold uppercase tracking-wider">Checked In</span>
+                <div className="w-8 h-8 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-700">
+                  <CheckCircle2 className="w-4 h-4" />
+                </div>
               </div>
-              <p className="text-2xl sm:text-3xl font-extrabold font-mono text-emerald-400">
+              <p className="text-3xl sm:text-4xl font-extrabold font-mono text-emerald-700">
                 {stats?.checkedInCount || 0}
               </p>
-              <div className="flex items-center gap-2 text-xs text-gray-400">
-                <span>Late: <strong className="text-amber-400">{stats?.lateCount || 0}</strong></span>
+              <div className="flex items-center gap-2 text-xs text-slate-600 font-medium">
+                <span>Late: <strong className="text-amber-700 font-mono font-bold">{stats?.lateCount || 0}</strong></span>
                 <span>•</span>
-                <span>Pending: <strong className="text-gray-300">{stats?.pendingCount || 0}</strong></span>
+                <span>Pending: <strong className="text-slate-800 font-mono font-bold">{stats?.pendingCount || 0}</strong></span>
               </div>
             </div>
 
-            <div className="p-5 rounded-3xl bg-[#0c101a] border border-gray-800 space-y-2">
-              <div className="flex items-center justify-between text-gray-400">
-                <span className="text-xs font-mono uppercase">Live Attendance Rate</span>
-                <Clock className="w-4 h-4 text-purple-400" />
+            <div className="p-6 rounded-3xl bg-white border border-purple-200/90 shadow-pastel-card space-y-2">
+              <div className="flex items-center justify-between text-slate-500">
+                <span className="text-xs font-mono font-bold uppercase tracking-wider">Live Attendance Rate</span>
+                <div className="w-8 h-8 rounded-xl bg-pink-100 flex items-center justify-center text-pink-700">
+                  <Clock className="w-4 h-4" />
+                </div>
               </div>
-              <p className="text-2xl sm:text-3xl font-extrabold font-mono text-purple-400">
+              <p className="text-3xl sm:text-4xl font-extrabold font-mono text-purple-900">
                 {stats?.attendanceRate || 0}%
               </p>
-              <div className="w-full bg-gray-800 h-2 rounded-full overflow-hidden">
+              <div className="w-full bg-purple-100 h-2.5 rounded-full overflow-hidden">
                 <div 
-                  className="bg-gradient-to-r from-purple-500 to-cyan-400 h-full rounded-full transition-all duration-500"
+                  className="bg-gradient-to-r from-purple-600 to-pink-500 h-full rounded-full transition-all duration-500"
                   style={{ width: `${stats?.attendanceRate || 0}%` }}
                 ></div>
               </div>
             </div>
 
-            <div className="p-5 rounded-3xl bg-[#0c101a] border border-gray-800 space-y-2">
-              <div className="flex items-center justify-between text-gray-400">
-                <span className="text-xs font-mono uppercase">Est. Revenue Collected</span>
-                <IndianRupee className="w-4 h-4 text-amber-400" />
+            <div className="p-6 rounded-3xl bg-white border border-purple-200/90 shadow-pastel-card space-y-2">
+              <div className="flex items-center justify-between text-slate-500">
+                <span className="text-xs font-mono font-bold uppercase tracking-wider">Est. Revenue Collected</span>
+                <div className="w-8 h-8 rounded-xl bg-amber-100 flex items-center justify-center text-amber-700">
+                  <IndianRupee className="w-4 h-4" />
+                </div>
               </div>
-              <p className="text-2xl sm:text-3xl font-extrabold font-mono text-amber-400">
+              <p className="text-3xl sm:text-4xl font-extrabold font-mono text-amber-800">
                 ₹{(stats?.totalRevenue || 0).toLocaleString()}
               </p>
-              <p className="text-xs text-gray-500">From verified participant fee tiers</p>
+              <p className="text-xs text-slate-500">From verified participant fee tiers</p>
             </div>
 
           </div>
 
           {/* Event Breakdown Cards */}
           <div className="space-y-4">
-            <h3 className="text-lg font-bold text-white font-display flex items-center gap-2">
-              <Layers className="w-5 h-5 text-cyan-400" />
+            <h3 className="text-lg font-bold text-purple-950 font-display flex items-center gap-2">
+              <Layers className="w-5 h-5 text-purple-700" />
               <span>Event-Wise Attendance Performance</span>
             </h3>
 
@@ -380,41 +394,41 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
               {stats?.eventBreakdown?.map((ev) => (
                 <div
                   key={ev.eventId}
-                  className="p-5 rounded-3xl bg-[#0c101a] border border-gray-800 space-y-4"
+                  className="p-6 rounded-3xl bg-white border border-purple-200 shadow-pastel-card space-y-4"
                 >
                   <div className="flex items-start justify-between">
                     <div>
-                      <span className="text-[10px] font-mono uppercase font-bold text-cyan-400">
+                      <span className="text-[10px] font-mono uppercase font-bold text-purple-700 bg-purple-100 px-2 py-0.5 rounded-md border border-purple-200">
                         {ev.category}
                       </span>
-                      <h4 className="text-lg font-bold text-white font-display">{ev.title}</h4>
+                      <h4 className="text-xl font-bold text-purple-950 font-display mt-1.5">{ev.title}</h4>
                     </div>
-                    <span className="px-2.5 py-1 rounded-lg bg-gray-900 border border-gray-800 font-mono text-xs font-bold text-gray-200">
+                    <span className="px-2.5 py-1 rounded-xl bg-purple-50 border border-purple-200 font-mono text-xs font-bold text-purple-900">
                       {ev.totalRegistrations} Registered
                     </span>
                   </div>
 
                   <div className="space-y-1.5">
-                    <div className="flex justify-between text-xs text-gray-400">
-                      <span>Attendance Turnout</span>
-                      <span className="font-mono text-white font-bold">{ev.attendanceRate}%</span>
+                    <div className="flex justify-between text-xs text-slate-600">
+                      <span className="font-medium">Attendance Turnout</span>
+                      <span className="font-mono text-purple-950 font-bold">{ev.attendanceRate}%</span>
                     </div>
-                    <div className="w-full bg-gray-800 h-2 rounded-full overflow-hidden">
+                    <div className="w-full bg-purple-100 h-2 rounded-full overflow-hidden">
                       <div 
-                        className="bg-cyan-400 h-full rounded-full"
+                        className="bg-purple-600 h-full rounded-full"
                         style={{ width: `${ev.attendanceRate}%` }}
                       ></div>
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-2 text-xs pt-2 border-t border-gray-800/80">
-                    <div className="p-2 rounded-xl bg-gray-900/60 text-gray-300">
-                      <span className="text-gray-500 block text-[10px] uppercase font-mono">Present / Late</span>
-                      <strong className="text-emerald-400 font-mono">{ev.attended}</strong> ({ev.late} Late)
+                  <div className="grid grid-cols-2 gap-2 text-xs pt-2 border-t border-purple-100">
+                    <div className="p-2.5 rounded-xl bg-purple-50/70 border border-purple-100 text-slate-700">
+                      <span className="text-slate-500 block text-[10px] uppercase font-mono font-semibold">Present / Late</span>
+                      <strong className="text-emerald-700 font-mono text-sm">{ev.attended}</strong> ({ev.late} Late)
                     </div>
-                    <div className="p-2 rounded-xl bg-gray-900/60 text-gray-300">
-                      <span className="text-gray-500 block text-[10px] uppercase font-mono">Revenue</span>
-                      <strong className="text-amber-400 font-mono">₹{ev.revenue}</strong>
+                    <div className="p-2.5 rounded-xl bg-purple-50/70 border border-purple-100 text-slate-700">
+                      <span className="text-slate-500 block text-[10px] uppercase font-mono font-semibold">Revenue</span>
+                      <strong className="text-amber-800 font-mono text-sm">₹{ev.revenue}</strong>
                     </div>
                   </div>
                 </div>
@@ -423,46 +437,46 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           </div>
 
           {/* Real-time Activity Feed */}
-          <div className="p-6 rounded-3xl bg-[#0c101a] border border-gray-800 space-y-4">
-            <h3 className="text-base font-bold text-white font-display flex items-center justify-between">
+          <div className="p-6 rounded-3xl bg-white border border-purple-200 shadow-pastel-card space-y-4">
+            <h3 className="text-base font-bold text-purple-950 font-display flex items-center justify-between">
               <span className="flex items-center gap-2">
-                <Clock className="w-4 h-4 text-cyan-400" />
+                <Clock className="w-4 h-4 text-purple-700" />
                 <span>Live Check-in Stream & Action Log</span>
               </span>
-              <span className="text-xs font-mono text-gray-500">Auto-updating</span>
+              <span className="text-xs font-mono font-bold text-purple-600 bg-purple-50 px-2 py-0.5 rounded border border-purple-200">Auto-updating</span>
             </h3>
 
-            <div className="space-y-2">
+            <div className="space-y-2.5">
               {stats?.recentLogs?.map((log) => (
                 <div
                   key={log.id}
-                  className={`p-3 rounded-2xl border text-xs flex items-center justify-between gap-4 ${
+                  className={`p-3.5 rounded-2xl border text-xs flex items-center justify-between gap-4 ${
                     log.type === 'DUPLICATE_ATTEMPT'
-                      ? 'bg-red-950/40 border-red-800 text-red-200'
+                      ? 'bg-red-50 border-red-200 text-red-900'
                       : log.statusRecorded === 'LATE'
-                      ? 'bg-amber-950/40 border-amber-800 text-amber-200'
-                      : 'bg-gray-900/60 border-gray-800 text-gray-300'
+                      ? 'bg-amber-50 border-amber-200 text-amber-900'
+                      : 'bg-purple-50/60 border-purple-100 text-slate-800'
                   }`}
                 >
                   <div className="flex items-center gap-3">
                     <span
-                      className={`w-2 h-2 rounded-full ${
+                      className={`w-2.5 h-2.5 rounded-full ${
                         log.type === 'DUPLICATE_ATTEMPT'
                           ? 'bg-red-500 animate-ping'
                           : log.statusRecorded === 'LATE'
-                          ? 'bg-amber-400'
-                          : 'bg-emerald-400'
+                          ? 'bg-amber-500'
+                          : 'bg-emerald-500'
                       }`}
                     ></span>
                     <div>
-                      <p className="font-semibold text-white">{log.message}</p>
-                      <p className="text-[10px] text-gray-400 font-mono">
+                      <p className="font-bold text-slate-900">{log.message}</p>
+                      <p className="text-[11px] text-slate-500 font-mono">
                         Station: {log.station} • Pass: {log.ticketId}
                       </p>
                     </div>
                   </div>
 
-                  <span className="text-[10px] font-mono text-gray-500 shrink-0">
+                  <span className="text-[11px] font-mono text-slate-500 shrink-0 font-medium">
                     {new Date(log.timestamp).toLocaleTimeString()}
                   </span>
                 </div>
@@ -480,17 +494,17 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
         <div className="space-y-6 animate-in fade-in duration-200">
           
           {/* Filter Bar */}
-          <div className="p-4 rounded-2xl bg-[#0c101a] border border-gray-800 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="p-4 rounded-2xl bg-white border border-purple-200 shadow-sm flex flex-col md:flex-row items-center justify-between gap-4">
             
             {/* Search */}
             <form onSubmit={handleSearchSubmit} className="relative flex-1 w-full md:w-auto">
-              <Search className="w-4 h-4 text-gray-500 absolute left-3 top-1/2 -translate-y-1/2" />
+              <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
                 placeholder="Search by name, roll no, email, ticket ID, team..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-9 pr-3 py-2 rounded-xl bg-gray-900 border border-gray-700 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400"
+                className="w-full pl-9 pr-3 py-2 rounded-xl bg-slate-50 border border-purple-200 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-purple-600 transition-all"
               />
             </form>
 
@@ -499,7 +513,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
               <select
                 value={selectedEventId}
                 onChange={(e) => setSelectedEventId(e.target.value)}
-                className="px-3 py-2 rounded-xl bg-gray-900 border border-gray-700 text-xs text-gray-200 focus:outline-none focus:border-cyan-400"
+                className="px-3 py-2 rounded-xl bg-white border border-purple-200 text-xs font-semibold text-slate-800 focus:outline-none focus:border-purple-600 shadow-sm"
               >
                 <option value="all">All Events</option>
                 {events.map((ev) => (
@@ -512,7 +526,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
               <select
                 value={selectedStatus}
                 onChange={(e) => setSelectedStatus(e.target.value)}
-                className="px-3 py-2 rounded-xl bg-gray-900 border border-gray-700 text-xs text-gray-200 focus:outline-none focus:border-cyan-400"
+                className="px-3 py-2 rounded-xl bg-white border border-purple-200 text-xs font-semibold text-slate-800 focus:outline-none focus:border-purple-600 shadow-sm"
               >
                 <option value="all">All Statuses</option>
                 <option value="REGISTERED">Pending (Registered)</option>
@@ -523,10 +537,10 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
               <button
                 onClick={() => window.print()}
-                className="px-3.5 py-2 rounded-xl bg-gray-900 hover:bg-gray-800 border border-gray-700 text-gray-200 text-xs font-semibold flex items-center gap-1.5 transition-all"
+                className="px-3.5 py-2 rounded-xl bg-white hover:bg-purple-50 border border-purple-200 text-slate-800 text-xs font-bold flex items-center gap-1.5 transition-all shadow-sm"
                 title="Print Attendee Sign-in Sheet"
               >
-                <Printer className="w-4 h-4 text-cyan-400" />
+                <Printer className="w-4 h-4 text-purple-700" />
                 <span className="hidden sm:inline">Print Sheet</span>
               </button>
             </div>
@@ -534,45 +548,45 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           </div>
 
           {/* Registrations Table */}
-          <div className="rounded-3xl bg-[#0c101a] border border-gray-800 overflow-hidden shadow-2xl">
+          <div className="rounded-3xl bg-white border border-purple-200 overflow-hidden shadow-pastel-card">
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs text-gray-300">
-                <thead className="bg-gray-900/90 text-[11px] font-mono uppercase text-gray-400 border-b border-gray-800">
+              <table className="w-full text-left text-xs text-slate-700">
+                <thead className="bg-purple-50/90 text-[11px] font-mono uppercase text-purple-900 font-bold border-b border-purple-200">
                   <tr>
-                    <th className="px-5 py-3.5">Ticket ID</th>
-                    <th className="px-5 py-3.5">Participant / Team</th>
-                    <th className="px-5 py-3.5">Event</th>
-                    <th className="px-5 py-3.5">Roll No & Dept</th>
-                    <th className="px-5 py-3.5">Attendance Status</th>
-                    <th className="px-5 py-3.5">Check-in Time</th>
-                    <th className="px-5 py-3.5 text-right">Actions</th>
+                    <th className="px-5 py-4">Ticket ID</th>
+                    <th className="px-5 py-4">Participant / Team</th>
+                    <th className="px-5 py-4">Event</th>
+                    <th className="px-5 py-4">Roll No & Dept</th>
+                    <th className="px-5 py-4">Attendance Status</th>
+                    <th className="px-5 py-4">Check-in Time</th>
+                    <th className="px-5 py-4 text-right">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-800/80">
+                <tbody className="divide-y divide-purple-100">
                   {registrations.length === 0 ? (
                     <tr>
-                      <td colSpan={7} className="px-6 py-12 text-center text-gray-500">
+                      <td colSpan={7} className="px-6 py-12 text-center text-slate-500 font-medium">
                         No registrations found matching the filters.
                       </td>
                     </tr>
                   ) : (
                     registrations.map((reg) => (
-                      <tr key={reg.id} className="hover:bg-gray-900/50 transition-colors">
+                      <tr key={reg.id} className="hover:bg-purple-50/50 transition-colors">
                         
                         {/* Ticket Code */}
-                        <td className="px-5 py-4 font-mono font-bold text-cyan-400">
+                        <td className="px-5 py-4 font-mono font-bold text-purple-700">
                           {reg.ticketId}
                         </td>
 
                         {/* Name & Team */}
                         <td className="px-5 py-4">
-                          <p className="font-bold text-white text-sm">{reg.leaderName}</p>
-                          <div className="flex items-center gap-2 text-[11px] text-gray-400 mt-0.5">
+                          <p className="font-bold text-purple-950 text-sm">{reg.leaderName}</p>
+                          <div className="flex items-center gap-2 text-[11px] text-slate-500 mt-0.5">
                             <span>{reg.leaderEmail}</span>
                             {reg.teamName && (
                               <>
                                 <span>•</span>
-                                <span className="text-purple-300 font-semibold font-mono">
+                                <span className="text-purple-700 font-semibold font-mono">
                                   {reg.teamName} ({1 + (reg.members?.length || 0)} members)
                                 </span>
                               </>
@@ -582,15 +596,15 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
                         {/* Event */}
                         <td className="px-5 py-4">
-                          <span className="font-semibold text-gray-200">
+                          <span className="font-semibold text-slate-800">
                             {reg.event?.title || reg.eventId}
                           </span>
                         </td>
 
                         {/* Roll & Dept */}
                         <td className="px-5 py-4">
-                          <p className="font-mono text-gray-200">{reg.rollNo}</p>
-                          <p className="text-[10px] text-gray-400 truncate max-w-[150px]">{reg.department}</p>
+                          <p className="font-mono text-slate-800 font-bold">{reg.rollNo}</p>
+                          <p className="text-[10px] text-slate-500 truncate max-w-[150px]">{reg.department}</p>
                         </td>
 
                         {/* Status */}
@@ -598,12 +612,12 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                           <span
                             className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-mono font-bold uppercase ${
                               reg.status === 'CHECKED_IN'
-                                ? 'bg-emerald-950 text-emerald-300 border border-emerald-700'
+                                ? 'bg-emerald-100 text-emerald-800 border border-emerald-300'
                                 : reg.status === 'LATE'
-                                ? 'bg-amber-950 text-amber-300 border border-amber-700'
+                                ? 'bg-amber-100 text-amber-800 border border-amber-300'
                                 : reg.status === 'ABSENT'
-                                ? 'bg-red-950 text-red-300 border border-red-700'
-                                : 'bg-gray-800 text-gray-300 border border-gray-700'
+                                ? 'bg-red-100 text-red-800 border border-red-300'
+                                : 'bg-purple-100 text-purple-800 border border-purple-200'
                             }`}
                           >
                             <span className="w-1.5 h-1.5 rounded-full bg-current"></span>
@@ -612,16 +626,16 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                         </td>
 
                         {/* Checked In Time */}
-                        <td className="px-5 py-4 font-mono text-[11px] text-gray-400">
+                        <td className="px-5 py-4 font-mono text-[11px] text-slate-600">
                           {reg.checkedInAt ? (
                             <div>
-                              <p className="text-emerald-300 font-bold">
+                              <p className="text-emerald-700 font-bold">
                                 {new Date(reg.checkedInAt).toLocaleTimeString()}
                               </p>
-                              <p className="text-[10px] text-gray-500">{reg.checkedInBy}</p>
+                              <p className="text-[10px] text-slate-500">{reg.checkedInBy}</p>
                             </div>
                           ) : (
-                            <span className="text-gray-600">—</span>
+                            <span className="text-slate-400">—</span>
                           )}
                         </td>
 
@@ -630,7 +644,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                           <div className="flex items-center justify-end gap-1.5">
                             <button
                               onClick={() => onOpenPassModal(reg)}
-                              className="p-1.5 rounded-lg bg-gray-800 hover:bg-gray-700 text-cyan-400 transition-colors"
+                              className="p-1.5 rounded-lg bg-purple-50 hover:bg-purple-100 text-purple-700 border border-purple-200 transition-colors"
                               title="View Event Pass"
                             >
                               <Eye className="w-4 h-4" />
@@ -640,7 +654,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                             {reg.status !== 'CHECKED_IN' && (
                               <button
                                 onClick={() => handleUpdateStatus(reg, 'CHECKED_IN')}
-                                className="px-2 py-1 rounded-lg bg-emerald-950 hover:bg-emerald-900 text-emerald-300 border border-emerald-700 text-[10px] font-bold"
+                                className="px-2.5 py-1 rounded-lg bg-emerald-100 hover:bg-emerald-200 text-emerald-800 border border-emerald-300 text-[10px] font-bold transition-colors"
                                 title="Mark Present"
                               >
                                 Present
@@ -651,7 +665,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                             {reg.status !== 'LATE' && (
                               <button
                                 onClick={() => handleUpdateStatus(reg, 'LATE')}
-                                className="px-2 py-1 rounded-lg bg-amber-950 hover:bg-amber-900 text-amber-300 border border-amber-700 text-[10px] font-bold"
+                                className="px-2.5 py-1 rounded-lg bg-amber-100 hover:bg-amber-200 text-amber-800 border border-amber-300 text-[10px] font-bold transition-colors"
                                 title="Mark Late"
                               >
                                 Late
@@ -662,7 +676,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                             {reg.status === 'CHECKED_IN' || reg.status === 'LATE' ? (
                               <button
                                 onClick={() => handleUpdateStatus(reg, 'REGISTERED')}
-                                className="px-2 py-1 rounded-lg bg-gray-800 hover:bg-gray-700 text-gray-300 text-[10px]"
+                                className="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 text-[10px] font-medium transition-colors"
                                 title="Reset Attendance"
                               >
                                 Reset
@@ -670,7 +684,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                             ) : (
                               <button
                                 onClick={() => handleUpdateStatus(reg, 'ABSENT')}
-                                className="px-2 py-1 rounded-lg bg-red-950 hover:bg-red-900 text-red-300 border border-red-700 text-[10px]"
+                                className="px-2.5 py-1 rounded-lg bg-red-100 hover:bg-red-200 text-red-800 border border-red-300 text-[10px] font-bold transition-colors"
                                 title="Mark Absent"
                               >
                                 Absent
@@ -699,46 +713,58 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
             {events.map((ev) => (
               <div
                 key={ev.id}
-                className="p-5 rounded-3xl bg-[#0c101a] border border-gray-800 flex flex-col justify-between space-y-4"
+                className="p-6 rounded-3xl bg-white border border-purple-200 shadow-pastel-card flex flex-col justify-between space-y-4"
               >
                 <div>
-                  <div className="relative h-44 rounded-2xl overflow-hidden bg-black mb-3">
+                  <div className="relative h-44 rounded-2xl overflow-hidden bg-purple-950/20 mb-3 border border-purple-100">
                     <img src={ev.poster} alt={ev.title} className="w-full h-full object-cover object-top" />
                     <div className="absolute top-2 right-2">
-                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold font-mono bg-black/80 text-cyan-300 border border-cyan-800">
+                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold font-mono bg-white/95 text-purple-900 border border-purple-200 shadow-sm">
                         {ev.category}
                       </span>
                     </div>
                   </div>
 
-                  <h3 className="text-xl font-bold font-display text-white">{ev.title}</h3>
-                  <p className="text-xs text-cyan-400 font-mono mt-0.5">{ev.subtitle || ev.tagline}</p>
-                  <p className="text-xs text-gray-400 mt-2 line-clamp-2">{ev.description}</p>
+                  <h3 className="text-xl font-bold font-display text-purple-950">{ev.title}</h3>
+                  <p className="text-xs text-purple-700 font-mono font-semibold mt-0.5">{ev.subtitle || ev.tagline}</p>
+                  <p className="text-xs text-slate-600 mt-2 line-clamp-2 leading-relaxed">{ev.description}</p>
 
-                  <div className="mt-3 space-y-1 text-xs text-gray-300 font-mono">
-                    <p>📅 {ev.date} ({ev.time})</p>
-                    <p>📍 {ev.venue}</p>
-                    <p>💰 {ev.prizePool} Prize Pool</p>
-                    <p>🎟️ Fee: {ev.feeText}</p>
+                  <div className="mt-4 space-y-1.5 text-xs text-slate-700 font-mono">
+                    <p className="flex items-center gap-1.5">
+                      <Calendar className="w-3.5 h-3.5 text-purple-600 shrink-0" />
+                      <span>{ev.date} ({ev.time})</span>
+                    </p>
+                    <p className="flex items-center gap-1.5">
+                      <MapPin className="w-3.5 h-3.5 text-pink-600 shrink-0" />
+                      <span>{ev.venue}</span>
+                    </p>
+                    <p className="flex items-center gap-1.5">
+                      <Trophy className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+                      <span>{ev.prizePool} Prize Pool</span>
+                    </p>
+                    <p className="flex items-center gap-1.5">
+                      <Ticket className="w-3.5 h-3.5 text-purple-600 shrink-0" />
+                      <span>Fee: {ev.feeText}</span>
+                    </p>
                   </div>
                 </div>
 
-                <div className="pt-3 border-t border-gray-800 flex items-center justify-between">
-                  <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-950 text-emerald-300 border border-emerald-700">
+                <div className="pt-3 border-t border-purple-100 flex items-center justify-between">
+                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-emerald-100 text-emerald-800 border border-emerald-300">
                     Status: {ev.status.toUpperCase()}
                   </span>
 
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => handleEditClick(ev)}
-                      className="p-2 rounded-xl bg-gray-900 hover:bg-gray-800 border border-gray-700 text-cyan-400 transition-colors"
+                      className="p-2 rounded-xl bg-purple-50 hover:bg-purple-100 border border-purple-200 text-purple-800 transition-colors"
                       title="Edit Event"
                     >
                       <Edit3 className="w-4 h-4" />
                     </button>
                     <button
                       onClick={() => handleDeleteEvent(ev.id, ev.title)}
-                      className="p-2 rounded-xl bg-red-950/60 hover:bg-red-900 border border-red-800 text-red-300 transition-colors"
+                      className="p-2 rounded-xl bg-red-50 hover:bg-red-100 border border-red-200 text-red-700 transition-colors"
                       title="Delete Event"
                     >
                       <Trash2 className="w-4 h-4" />
@@ -756,62 +782,62 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
       {/* ========================================== */}
       {activeTab === 'logs' && (
         <div className="space-y-6 animate-in fade-in duration-200">
-          <div className="p-4 rounded-2xl bg-[#0c101a] border border-gray-800 flex items-center justify-between">
+          <div className="p-5 rounded-2xl bg-white border border-purple-200 shadow-sm flex items-center justify-between">
             <div>
-              <h3 className="text-sm font-bold text-white font-display">System Check-in Audit Log</h3>
-              <p className="text-xs text-gray-400">
+              <h3 className="text-sm font-bold text-purple-950 font-display">System Check-in Audit Log</h3>
+              <p className="text-xs text-slate-500 mt-0.5">
                 Full chronological ledger tracking verified entries, duplicate scan flags, and manual administrator overrides.
               </p>
             </div>
             <button
               onClick={loadData}
-              className="px-3 py-1.5 rounded-xl bg-gray-900 hover:bg-gray-800 text-xs text-cyan-400 border border-gray-800"
+              className="px-3.5 py-1.5 rounded-xl bg-purple-50 hover:bg-purple-100 text-xs text-purple-800 font-bold border border-purple-200 transition-colors"
             >
               Refresh Logs
             </button>
           </div>
 
-          <div className="rounded-3xl bg-[#0c101a] border border-gray-800 overflow-hidden shadow-2xl">
-            <table className="w-full text-left text-xs text-gray-300">
-              <thead className="bg-gray-900/90 text-[11px] font-mono uppercase text-gray-400 border-b border-gray-800">
+          <div className="rounded-3xl bg-white border border-purple-200 overflow-hidden shadow-pastel-card">
+            <table className="w-full text-left text-xs text-slate-700">
+              <thead className="bg-purple-50/90 text-[11px] font-mono uppercase text-purple-900 font-bold border-b border-purple-200">
                 <tr>
-                  <th className="px-5 py-3.5">Timestamp</th>
-                  <th className="px-5 py-3.5">Log Type</th>
-                  <th className="px-5 py-3.5">Ticket ID</th>
-                  <th className="px-5 py-3.5">Attendee Name</th>
-                  <th className="px-5 py-3.5">Station</th>
-                  <th className="px-5 py-3.5">Message / System Reason</th>
+                  <th className="px-5 py-4">Timestamp</th>
+                  <th className="px-5 py-4">Log Type</th>
+                  <th className="px-5 py-4">Ticket ID</th>
+                  <th className="px-5 py-4">Attendee Name</th>
+                  <th className="px-5 py-4">Station</th>
+                  <th className="px-5 py-4">Message / System Reason</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-800/80">
+              <tbody className="divide-y divide-purple-100">
                 {logs.map((log) => (
-                  <tr key={log.id} className="hover:bg-gray-900/50">
-                    <td className="px-5 py-3.5 font-mono text-gray-400">
+                  <tr key={log.id} className="hover:bg-purple-50/50">
+                    <td className="px-5 py-4 font-mono text-slate-600">
                       {new Date(log.timestamp).toLocaleString()}
                     </td>
-                    <td className="px-5 py-3.5">
+                    <td className="px-5 py-4">
                       <span
-                        className={`px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase ${
+                        className={`px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase ${
                           log.type === 'DUPLICATE_ATTEMPT'
-                            ? 'bg-red-950 text-red-300 border border-red-700'
+                            ? 'bg-red-100 text-red-800 border border-red-300'
                             : log.type === 'MANUAL_OVERRIDE'
-                            ? 'bg-purple-950 text-purple-300 border border-purple-700'
-                            : 'bg-emerald-950 text-emerald-300 border border-emerald-700'
+                            ? 'bg-purple-100 text-purple-800 border border-purple-200'
+                            : 'bg-emerald-100 text-emerald-800 border border-emerald-300'
                         }`}
                       >
                         {log.type}
                       </span>
                     </td>
-                    <td className="px-5 py-3.5 font-mono font-bold text-cyan-400">
+                    <td className="px-5 py-4 font-mono font-bold text-purple-700">
                       {log.ticketId}
                     </td>
-                    <td className="px-5 py-3.5 font-semibold text-white">
+                    <td className="px-5 py-4 font-bold text-purple-950">
                       {log.attendeeName}
                     </td>
-                    <td className="px-5 py-3.5 font-mono text-gray-400">
+                    <td className="px-5 py-4 font-mono text-slate-600">
                       {log.station}
                     </td>
-                    <td className="px-5 py-3.5 text-gray-300">
+                    <td className="px-5 py-4 text-slate-700">
                       {log.message}
                     </td>
                   </tr>
@@ -826,15 +852,15 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
       {/* MODAL: CREATE / EDIT EVENT */}
       {/* ========================================== */}
       {showEventModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto bg-black/85 backdrop-blur-md">
-          <div className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl bg-[#0c101a] border border-gray-700 p-6 sm:p-8 space-y-6 text-gray-200">
-            <div className="flex items-center justify-between border-b border-gray-800 pb-4">
-              <h2 className="text-xl font-bold font-display text-white">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto bg-black/60 backdrop-blur-sm">
+          <div className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl bg-white border border-purple-200 p-6 sm:p-8 space-y-6 text-slate-800 shadow-2xl">
+            <div className="flex items-center justify-between border-b border-purple-100 pb-4">
+              <h2 className="text-xl font-bold font-display text-purple-950">
                 {editingEvent ? 'Edit Event Details' : 'Create New Event'}
               </h2>
               <button
                 onClick={() => setShowEventModal(false)}
-                className="p-1.5 rounded-full hover:bg-gray-800 text-gray-400"
+                className="p-1.5 rounded-full hover:bg-purple-100 text-slate-500"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -843,149 +869,119 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
             <form onSubmit={handleSaveEvent} className="space-y-4 text-xs">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-gray-400 mb-1">Event Title *</label>
+                  <label className="block text-slate-600 font-bold mb-1">Event Title *</label>
                   <input
                     type="text"
                     required
                     value={eventForm.title}
                     onChange={(e) => setEventForm({ ...eventForm, title: e.target.value })}
-                    className="w-full px-3 py-2 rounded-xl bg-gray-900 border border-gray-700 text-white focus:outline-none focus:border-cyan-400"
+                    className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-purple-200 text-slate-900 focus:outline-none focus:border-purple-600"
                   />
                 </div>
+
                 <div>
-                  <label className="block text-gray-400 mb-1">Category</label>
+                  <label className="block text-slate-600 font-bold mb-1">Category *</label>
                   <select
                     value={eventForm.category}
                     onChange={(e) => setEventForm({ ...eventForm, category: e.target.value })}
-                    className="w-full px-3 py-2 rounded-xl bg-gray-900 border border-gray-700 text-white focus:outline-none focus:border-cyan-400"
+                    className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-purple-200 text-slate-900 focus:outline-none focus:border-purple-600"
                   >
                     <option value="Hackathon">Hackathon</option>
                     <option value="Workshop">Workshop</option>
-                    <option value="Seminar">Seminar</option>
-                    <option value="Coding Sprint">Coding Sprint</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-gray-400 mb-1">Subtitle / Sub-theme</label>
-                  <input
-                    type="text"
-                    value={eventForm.subtitle}
-                    onChange={(e) => setEventForm({ ...eventForm, subtitle: e.target.value })}
-                    className="w-full px-3 py-2 rounded-xl bg-gray-900 border border-gray-700 text-white focus:outline-none focus:border-cyan-400"
-                  />
-                </div>
-                <div>
-                  <label className="block text-gray-400 mb-1">Tagline</label>
-                  <input
-                    type="text"
-                    value={eventForm.tagline}
-                    onChange={(e) => setEventForm({ ...eventForm, tagline: e.target.value })}
-                    className="w-full px-3 py-2 rounded-xl bg-gray-900 border border-gray-700 text-white focus:outline-none focus:border-cyan-400"
-                  />
-                </div>
-                <div>
-                  <label className="block text-gray-400 mb-1">Date String (e.g. 20 April, 2026)</label>
-                  <input
-                    type="text"
-                    required
-                    value={eventForm.date}
-                    onChange={(e) => setEventForm({ ...eventForm, date: e.target.value })}
-                    className="w-full px-3 py-2 rounded-xl bg-gray-900 border border-gray-700 text-white focus:outline-none focus:border-cyan-400"
-                  />
-                </div>
-                <div>
-                  <label className="block text-gray-400 mb-1">Time (e.g. 09:00 AM – 05:00 PM)</label>
-                  <input
-                    type="text"
-                    required
-                    value={eventForm.time}
-                    onChange={(e) => setEventForm({ ...eventForm, time: e.target.value })}
-                    className="w-full px-3 py-2 rounded-xl bg-gray-900 border border-gray-700 text-white focus:outline-none focus:border-cyan-400"
-                  />
-                </div>
-                <div>
-                  <label className="block text-gray-400 mb-1">Venue</label>
-                  <input
-                    type="text"
-                    required
-                    value={eventForm.venue}
-                    onChange={(e) => setEventForm({ ...eventForm, venue: e.target.value })}
-                    className="w-full px-3 py-2 rounded-xl bg-gray-900 border border-gray-700 text-white focus:outline-none focus:border-cyan-400"
-                  />
-                </div>
-                <div>
-                  <label className="block text-gray-400 mb-1">Prize Pool Display (e.g. ₹25,000+)</label>
-                  <input
-                    type="text"
-                    value={eventForm.prizePool}
-                    onChange={(e) => setEventForm({ ...eventForm, prizePool: e.target.value })}
-                    className="w-full px-3 py-2 rounded-xl bg-gray-900 border border-gray-700 text-white focus:outline-none focus:border-cyan-400"
-                  />
-                </div>
-                <div>
-                  <label className="block text-gray-400 mb-1">Fee Display (e.g. ₹89 / Student)</label>
-                  <input
-                    type="text"
-                    value={eventForm.feeText}
-                    onChange={(e) => setEventForm({ ...eventForm, feeText: e.target.value })}
-                    className="w-full px-3 py-2 rounded-xl bg-gray-900 border border-gray-700 text-white focus:outline-none focus:border-cyan-400"
-                  />
-                </div>
-                <div>
-                  <label className="block text-gray-400 mb-1">Registration Fee Amount (INR)</label>
-                  <input
-                    type="number"
-                    value={eventForm.registrationFee}
-                    onChange={(e) => setEventForm({ ...eventForm, registrationFee: Number(e.target.value) })}
-                    className="w-full px-3 py-2 rounded-xl bg-gray-900 border border-gray-700 text-white focus:outline-none focus:border-cyan-400"
-                  />
-                </div>
-                <div>
-                  <label className="block text-gray-400 mb-1">Poster Image URL</label>
-                  <input
-                    type="text"
-                    value={eventForm.poster}
-                    onChange={(e) => setEventForm({ ...eventForm, poster: e.target.value })}
-                    className="w-full px-3 py-2 rounded-xl bg-gray-900 border border-gray-700 text-white focus:outline-none focus:border-cyan-400"
-                  />
-                </div>
-                <div>
-                  <label className="block text-gray-400 mb-1">Team Requirement</label>
-                  <select
-                    value={eventForm.teamType}
-                    onChange={(e) => setEventForm({ ...eventForm, teamType: e.target.value as any })}
-                    className="w-full px-3 py-2 rounded-xl bg-gray-900 border border-gray-700 text-white focus:outline-none focus:border-cyan-400"
-                  >
-                    <option value="individual_or_team">Individual or Team</option>
-                    <option value="team_only">Team Only (2-4 Members)</option>
-                    <option value="individual_only">Solo Only</option>
+                    <option value="Masterclass">Masterclass</option>
                   </select>
                 </div>
               </div>
 
               <div>
-                <label className="block text-gray-400 mb-1">Description</label>
+                <label className="block text-slate-600 font-bold mb-1">Subtitle / Tagline *</label>
+                <input
+                  type="text"
+                  required
+                  value={eventForm.subtitle || eventForm.tagline}
+                  onChange={(e) => setEventForm({ ...eventForm, subtitle: e.target.value, tagline: e.target.value })}
+                  className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-purple-200 text-slate-900 focus:outline-none focus:border-purple-600"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div>
+                  <label className="block text-slate-600 font-bold mb-1">Date String *</label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="e.g. Nov 14, 2026"
+                    value={eventForm.date}
+                    onChange={(e) => setEventForm({ ...eventForm, date: e.target.value })}
+                    className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-purple-200 text-slate-900 focus:outline-none focus:border-purple-600"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-slate-600 font-bold mb-1">Prize Pool *</label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="e.g. ₹25,000+"
+                    value={eventForm.prizePool}
+                    onChange={(e) => setEventForm({ ...eventForm, prizePool: e.target.value })}
+                    className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-purple-200 text-slate-900 focus:outline-none focus:border-purple-600"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-slate-600 font-bold mb-1">Registration Fee (₹) *</label>
+                  <input
+                    type="number"
+                    required
+                    value={eventForm.registrationFee}
+                    onChange={(e) =>
+                      setEventForm({
+                        ...eventForm,
+                        registrationFee: Number(e.target.value),
+                        feeText: `₹${e.target.value} / Student`,
+                      })
+                    }
+                    className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-purple-200 text-slate-900 focus:outline-none focus:border-purple-600"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-slate-600 font-bold mb-1">Venue *</label>
+                <input
+                  type="text"
+                  required
+                  value={eventForm.venue}
+                  onChange={(e) => setEventForm({ ...eventForm, venue: e.target.value })}
+                  className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-purple-200 text-slate-900 focus:outline-none focus:border-purple-600"
+                />
+              </div>
+
+              <div>
+                <label className="block text-slate-600 font-bold mb-1">Description *</label>
                 <textarea
                   rows={3}
+                  required
                   value={eventForm.description}
                   onChange={(e) => setEventForm({ ...eventForm, description: e.target.value })}
-                  className="w-full px-3 py-2 rounded-xl bg-gray-900 border border-gray-700 text-white focus:outline-none focus:border-cyan-400"
+                  className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-purple-200 text-slate-900 focus:outline-none focus:border-purple-600"
                 ></textarea>
               </div>
 
-              <div className="flex justify-end gap-3 pt-3 border-t border-gray-800">
+              <div className="pt-4 border-t border-purple-100 flex items-center justify-end gap-3">
                 <button
                   type="button"
                   onClick={() => setShowEventModal(false)}
-                  className="px-4 py-2 rounded-xl border border-gray-700 hover:bg-gray-800 text-gray-300"
+                  className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-6 py-2 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-black font-bold shadow-neon-cyan"
+                  className="px-5 py-2 rounded-xl bg-purple-700 hover:bg-pink-600 text-white font-bold shadow-pastel-purple"
                 >
-                  Save Event
+                  {editingEvent ? 'Save Changes' : 'Create Event'}
                 </button>
               </div>
             </form>
