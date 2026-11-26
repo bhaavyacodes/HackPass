@@ -8,37 +8,50 @@ export default {
   theme: {
     extend: {
       colors: {
+        pastel: {
+          canvas: '#FAF7FD',
+          card: '#FFFFFF',
+          purple: '#7E22CE',
+          'purple-dark': '#4A154B',
+          'purple-deep': '#2E1065',
+          'purple-light': '#F3E8FF',
+          'purple-subtle': '#FAF5FF',
+          pink: '#EC4899',
+          'pink-dark': '#BE185D',
+          'pink-light': '#FDF2F8',
+          'pink-subtle': '#FFF5F8',
+          border: '#E9D5FF',
+          'border-pink': '#FBCFE8',
+          'text-dark': '#1E1B4B',
+          'text-muted': '#64748B',
+        },
         h4t: {
-          dark: '#080A10',
-          darker: '#040609',
-          card: '#0F1420',
-          border: '#1F293D',
-          cyan: '#00F0FF',
-          blue: '#0284C7',
-          purple: '#9333EA',
-          violet: '#7C3AED',
-          pink: '#F43F5E',
-          neon: '#06B6D4'
+          purple: '#6B21A8',
+          magenta: '#C026D3',
+          pink: '#EC4899',
+          dark: '#1E1B4B',
+          yellow: '#EAB308',
         }
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['Plus Jakarta Sans', 'Inter', 'system-ui', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
-        display: ['Space Grotesk', 'sans-serif']
+        display: ['Space Grotesk', 'Plus Jakarta Sans', 'sans-serif']
       },
       boxShadow: {
-        'neon-cyan': '0 0 20px -2px rgba(0, 240, 255, 0.4)',
-        'neon-purple': '0 0 20px -2px rgba(147, 51, 234, 0.4)',
-        'neon-pink': '0 0 20px -2px rgba(244, 63, 94, 0.4)',
+        'pastel-purple': '0 10px 30px -5px rgba(126, 34, 206, 0.12)',
+        'pastel-pink': '0 10px 30px -5px rgba(236, 72, 153, 0.15)',
+        'pastel-card': '0 4px 25px 0 rgba(147, 51, 234, 0.06), 0 1px 3px 0 rgba(0, 0, 0, 0.04)',
+        'pastel-hover': '0 14px 40px -5px rgba(126, 34, 206, 0.18)',
       },
       animation: {
         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'glow': 'glow 2s ease-in-out infinite alternate',
+        'float': 'float 3s ease-in-out infinite',
       },
       keyframes: {
-        glow: {
-          '0%': { boxShadow: '0 0 10px rgba(0, 240, 255, 0.2)' },
-          '100%': { boxShadow: '0 0 25px rgba(0, 240, 255, 0.6)' },
+        float: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-6px)' },
         }
       }
     },

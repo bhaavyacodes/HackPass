@@ -136,25 +136,25 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto bg-black/85 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="relative w-full max-w-2xl max-h-[92vh] overflow-y-auto rounded-3xl bg-[#0c101a] border border-gray-700/80 shadow-2xl text-gray-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-200">
+      <div className="relative w-full max-w-2xl max-h-[92vh] overflow-y-auto rounded-3xl bg-white border border-purple-200 shadow-2xl text-slate-800">
         
         {/* Header */}
-        <div className="sticky top-0 z-10 flex items-center justify-between p-6 bg-[#0c101a]/95 backdrop-blur-md border-b border-gray-800">
+        <div className="sticky top-0 z-10 flex items-center justify-between p-6 bg-white/95 backdrop-blur-md border-b border-purple-100">
           <div>
             <div className="flex items-center gap-2">
-              <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-cyan-950 text-cyan-300 border border-cyan-800">
+              <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-purple-100 text-purple-900 border border-purple-200">
                 {event.category}
               </span>
-              <span className="text-xs text-gray-400 font-mono">Registration Pass Generator</span>
+              <span className="text-xs text-slate-500 font-mono font-medium">Official Registration Pass Generator</span>
             </div>
-            <h2 className="text-xl sm:text-2xl font-bold font-display text-white mt-1">
+            <h2 className="text-xl sm:text-2xl font-bold font-display text-purple-950 mt-1">
               Register for {event.title}
             </h2>
           </div>
           <button
             onClick={onClose}
-            className="p-2 rounded-full hover:bg-gray-800 text-gray-400 hover:text-white transition-colors"
+            className="p-2 rounded-full hover:bg-purple-50 text-slate-400 hover:text-purple-800 transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -185,7 +185,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
           {/* Registration Type Selector (if both individual & team allowed) */}
           {event.teamType === 'individual_or_team' && (
             <div className="space-y-2">
-              <label className="text-xs font-semibold uppercase text-gray-400 font-mono">
+              <label className="text-xs font-semibold uppercase text-slate-500 font-mono">
                 Participation Type
               </label>
               <div className="grid grid-cols-2 gap-3">
@@ -197,8 +197,8 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                   }}
                   className={`p-3 rounded-xl border flex items-center justify-center gap-2 text-xs sm:text-sm font-semibold transition-all ${
                     registrationType === 'individual'
-                      ? 'bg-cyan-500/20 text-cyan-300 border-cyan-500 shadow-neon-cyan'
-                      : 'bg-gray-900/60 text-gray-400 border-gray-800 hover:border-gray-700'
+                      ? 'bg-purple-100 text-purple-900 border-purple-400 font-bold shadow-sm'
+                      : 'bg-slate-50 text-slate-600 border-purple-200 hover:bg-purple-50'
                   }`}
                 >
                   <User className="w-4 h-4" />
@@ -209,8 +209,8 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                   onClick={() => setRegistrationType('team')}
                   className={`p-3 rounded-xl border flex items-center justify-center gap-2 text-xs sm:text-sm font-semibold transition-all ${
                     registrationType === 'team'
-                      ? 'bg-cyan-500/20 text-cyan-300 border-cyan-500 shadow-neon-cyan'
-                      : 'bg-gray-900/60 text-gray-400 border-gray-800 hover:border-gray-700'
+                      ? 'bg-purple-100 text-purple-900 border-purple-400 font-bold shadow-sm'
+                      : 'bg-slate-50 text-slate-600 border-purple-200 hover:bg-purple-50'
                   }`}
                 >
                   <Users className="w-4 h-4" />
@@ -469,32 +469,32 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
           </div>
 
           {/* Submit Action */}
-          <div className="pt-4 border-t border-gray-800 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="text-xs text-gray-400">
-              Registration Fee: <span className="font-mono text-cyan-400 font-bold text-sm">{event.feeText}</span>
+          <div className="pt-4 border-t border-purple-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="text-xs text-slate-500">
+              Registration Fee: <span className="font-mono text-purple-700 font-bold text-sm">{event.feeText}</span>
             </div>
 
             <div className="flex items-center gap-3 w-full sm:w-auto">
               <button
                 type="button"
                 onClick={onClose}
-                className="flex-1 sm:flex-none px-4 py-2.5 rounded-xl border border-gray-700 hover:bg-gray-800 text-sm font-semibold"
+                className="flex-1 sm:flex-none px-4 py-2.5 rounded-xl border border-purple-200 hover:bg-purple-50 text-slate-700 text-sm font-semibold"
               >
                 Cancel
               </button>
               <button
                 type="submit"
                 disabled={loading}
-                className="flex-1 sm:flex-none px-6 py-2.5 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 text-black font-bold text-sm shadow-neon-cyan transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+                className="flex-1 sm:flex-none px-6 py-2.5 rounded-xl bg-purple-700 hover:bg-purple-800 text-white font-bold text-sm shadow-pastel-purple transition-all disabled:opacity-50 flex items-center justify-center gap-2"
               >
                 {loading ? (
                   <>
-                    <span className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin"></span>
+                    <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
                     <span>Generating Pass...</span>
                   </>
                 ) : (
                   <>
-                    <Sparkles className="w-4 h-4 text-black" />
+                    <Sparkles className="w-4 h-4 text-white" />
                     <span>Confirm & Get QR Pass</span>
                   </>
                 )}
